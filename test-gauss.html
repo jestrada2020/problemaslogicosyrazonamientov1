@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Gauss-Jordan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/gauss-jordan.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <h1>Test Gauss-Jordan</h1>
+        <div id="test-content" class="mt-4"></div>
+    </div>
+    
+    <script src="js/matrices.js"></script>
+    <script src="js/gauss-jordan.js"></script>
+    <script>
+        // Configurar MathJax
+        MathJax.Hub.Config({
+            tex2jax: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+            CommonHTML: { linebreaks: { automatic: true } },
+            "HTML-CSS": { linebreaks: { automatic: true } },
+            SVG: { linebreaks: { automatic: true } },
+            TeX: {Macros: {bm: "\\boldsymbol"}}
+        });
+        
+        // Crear objeto app simplificado para test
+        const app = {
+            gaussJordan: window.app ? window.app.gaussJordan : {}
+        };
+        
+        // Funciones globales para compatibilidad
+        window.loadGaussJordanExample = function() {
+            if (app.gaussJordan && app.gaussJordan.loadExample) {
+                app.gaussJordan.loadExample();
+            }
+        };
+        
+        window.resetGaussJordan = function() {
+            if (app.gaussJordan && app.gaussJordan.resetAll) {
+                app.gaussJordan.resetAll();
+            }
+        };
+        
+        // Cargar contenido de prueba
+        document.addEventListener('DOMContentLoaded', () => {
+            const testContent = document.getElementById('test-content');
+            testContent.innerHTML = `
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card gj-card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Dimensiones del Sistema</h5>
+                                <div class="row mb-2">
+                                    <div class="col-6">
+                                        <label for="gjRows" class="form-label form-label-sm">Filas:</label>
+                                        <input type="number" id="gjRows" class="form-control form-control-sm" value="3" min="1" max="10">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="gjCols" class="form-label form-label-sm">Columnas:</label>
+                                        <input type="number" id="gjCols" class="form-control form-control-sm" value="3" min="1" max="10">
+                                    </div>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-sm btn-secondary" onclick="app.gaussJordan.updateDimensions()">Actualizar</button>
+                                    <button class="btn btn-sm btn-info" onclick="loadGaussJordanExample()">Cargar Ejemplo</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card gj-card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Matriz Inicial</h5>
+                                <div id="gjMatrixInputs" class="mb-2"></div>
+                                <button class="btn btn-sm btn-primary w-100" onclick="app.gaussJordan.generateMatrix()">
+                                    <i class="fas fa-play"></i> Generar Matriz
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card gj-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Operaciones</h5>
+                                <div class="mb-2">
+                                    <select id="gjOperationType" class="form-select form-select-sm">
+                                        <option value="multiply">Multiplicar fila por escalar</option>
+                                        <option value="add">Sumar múltiplo de fila</option>
+                                        <option value="swap">Intercambiar filas</option>
+                                    </select>
+                                </div>
+                                <div id="gjOperationInputs"></div>
+                                <div class="d-grid gap-2 mt-2">
+                                    <button class="btn btn-sm btn-success" onclick="app.gaussJordan.applyOperation()">Aplicar</button>
+                                    <button class="btn btn-sm btn-warning" onclick="app.gaussJordan.undoOperation()">Deshacer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card gj-card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Matriz Original</h5>
+                                <div id="gjAugmentedMatrix" class="gj-matrix">Sistema no cargado.</div>
+                            </div>
+                        </div>
+                        <div class="card gj-card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Matriz Actual</h5>
+                                <div id="gjCurrentMatrix" class="gj-matrix">Genere una matriz.</div>
+                            </div>
+                        </div>
+                        <div class="card gj-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Historial</h5>
+                                <div id="gjOperationHistory" class="gj-history">No hay operaciones.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Inicializar después de cargar el DOM
+            setTimeout(() => {
+                if (app.gaussJordan && app.gaussJordan.init) {
+                    app.gaussJordan.init();
+                    console.log('Test inicializado');
+                } else {
+                    console.error('app.gaussJordan no disponible');
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caja de Herramientas Matemáticas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Configuración de MathJax -->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: { 
+                inlineMath: [['$', '$']], 
+                displayMath: [['$$', '$$']],
+                processEscapes: true
+            },
+            CommonHTML: { linebreaks: { automatic: true } },
+            "HTML-CSS": { linebreaks: { automatic: true } },
+            SVG: { linebreaks: { automatic: true } },
+            TeX: {Macros: {bm: "\\boldsymbol"}},
+            showProcessingMessages: false,
+            messageStyle: "none"
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <!-- Archivos CSS externos -->
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/gauss-jordan.css" rel="stylesheet">
+    <link href="css/determinantes.css" rel="stylesheet">
+    <link href="css/problema-logico.css" rel="stylesheet">
+</head>
+<body>
+    <div id="sidebar">
+        <h2>Comprensión lectora y razonamiento lógico interactivos</h2>
+        <ul>
+            <li><button onclick="app.loadTool('introduccion1')" class="active">Introducción</button></li>
+            <li><button onclick="app.loadTool('problemaLogico1')">Problema Lógico Uno</button></li>
+            <li><button onclick="app.loadTool('problemaLogico2')">Problema Lógico Dos</button></li>
+            <li><button onclick="app.loadTool('problemaLogico3')">Problema Lógico Tres</button></li>
+            <li><button onclick="app.loadTool('problemaLogico4')">Problema Lógico Cuatro</button></li>
+            <li><button onclick="app.loadTool('problemaLogico5')">Problema Lógico Cinco</button></li>
+            <li><button onclick="app.loadTool('problemaLogico6')">Problema Lógico Seis</button></li>
+            <li><button onclick="app.loadTool('problemaLogico7')">Problema Lógico Siete</button></li>
+            <li><button onclick="app.loadTool('problemaLogico8')">Problema Lógico Ocho</button></li>
+            <li><button onclick="app.loadTool('problemaLogico9')">Problema Lógico Nueve</button></li>
+            <li><button onclick="app.loadTool('problemaLogico10')">Problema Lógico Diez</button></li>
+            <!-- Herramientas temporalmente deshabilitadas:
+            <li><button onclick="app.loadTool('algebraLineal')">Sistemas de Ecuaciones (Gauss-Jordan)</button></li>
+            <li><button onclick="app.loadTool('determinantes')">Determinantes por Operaciones</button></li>
+            -->
+        </ul>
+    </div>
+
+    <div id="content">
+        <div id="tool-content" class="tool-container">
+            <!-- El contenido de la herramienta se cargará aquí -->
+        </div>
+    </div>
+
+    <script>
+        window.difyChatbotConfig = {
+            token: '4MjES7fQqfQ4u9Y6',
+            systemVariables: {
+                // user_id: 'YOU CAN DEFINE USER ID HERE',
+                // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
+            },
+        }
+    </script>
+    <script
+        src="https://udify.app/embed.min.js"
+        id="4MjES7fQqfQ4u9Y6"
+        defer>
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Archivos JavaScript externos en orden de dependencia -->
+    <script src="js/matrices.js"></script>
+    <script src="js/problema-logico.js"></script>
+    <script src="js/problema-logico2.js"></script>
+    <script src="js/problema-logico3.js"></script>
+    <script src="js/problema-logico4.js"></script>
+    <script src="js/problema-logico5.js"></script>
+    <script src="js/problema-logico6.js"></script>
+    <script src="js/problema-logico7.js"></script>
+    <script src="js/problema-logico8.js"></script>
+    <script src="js/problema-logico9.js"></script>
+    <script src="js/problema-logico10.js"></script>
+    <script src="js/determinantes.js"></script>
+    <script src="js/gauss-jordan.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Gauss-Jordan Debug</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/gauss-jordan.css" rel="stylesheet">
+    <style>
+        body { padding: 20px; }
+        .debug { background: #ffffcc; padding: 10px; margin: 10px 0; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>Debug Gauss-Jordan</h1>
+    <div class="debug">
+        <h3>Estado de los scripts:</h3>library(shiny)
+library(DT)
+library(shinythemes)
+library(dplyr)
+
+# --- Definición del Problema y Elementos ---
+nombres_propios_edad <- c("Ana", "Carmen", "Luisa", "Sara", "Susana") # Luisa es mencionada en el enunciado
+apellidos_edad <- c("Bravo", "Gómez", "Larra", "Parra", "Vázquez")
+# Edades posibles: 91 a 99. Se sabe que 4 son pares y 1 impar.
+# Edades pares posibles: 92, 94, 96, 98. Edad impar posible: 91, 93, 95, 97, 99.
+
+# Texto del problema
+texto_problema_html_edad <- HTML(
+  "Cinco mujeres jubiladas (Ana, Carmen, Luisa, Sara, Susana) tienen entre 91 y 99 años.
+  No hay dos con la misma edad. Todas las edades son números enteros.
+  El objetivo es encontrar el nombre completo y la edad de cada una."
+)
+
+# Pistas
+pistas_html_edad <- HTML(
+  "<ul>
+    <li><b>Pista 1:</b> La edad de Carmen es intermedia entre la de la señora Bravo y la de la señora Gómez. (B < C < G o G < C < B)</li>
+    <li><b>Pista 2:</b> Sara es mayor que la señora Gómez, pero más joven que Carmen. (G < S < C)</li>
+    <li><b>Pista 3:</b> Todas las mujeres del grupo tienen un número par de años, a excepción de la señora Vázquez.</li>
+    <li><b>Pista 4:</b> Susana no es ni la mayor ni la menor del grupo.</li>
+    <li><b>Pista 5:</b> La señora Larra le lleva tantos años a Ana como la señora Parra le lleva a la señora Larra. (Ana < Larra < Parra, y Larra - Ana = Parra - Larra)</li>
+  </ul>"
+)
+
+# --- Funciones Auxiliares ---
+inicializar_matrices_edad <- function() {
+  # Edades posibles como strings para rownames/colnames si fuera necesario, pero aquí las usaremos como valores.
+  # La matriz NombreEdad tendrá los valores numéricos de las edades.
+  # Las otras matrices serán de 'X' y '•'.
+  posibles_edades_str <- as.character(91:99) # Para la matriz, si se quisiera hacer una matriz Nombre vs RangoDeEdad
+  
+  list(
+    NombreApellido = matrix("", nrow = length(nombres_propios_edad), ncol = length(apellidos_edad),
+                            dimnames = list(nombres_propios_edad, apellidos_edad)),
+    NombreEdad_val = setNames(rep(NA_integer_, length(nombres_propios_edad)), nombres_propios_edad), # Vector para edades exactas
+    ApellidoEdad_val = setNames(rep(NA_integer_, length(apellidos_edad)), apellidos_edad) # Vector para edades exactas
+    # Podríamos tener Nombre vs RangoDeEdades si quisiéramos marcar X en edades imposibles
+  )
+}
+
+marcar_xes_auto_edad <- function(mat, fila_sel, col_sel) {
+  # Para matrices NombreApellido
+  for (c_idx in 1:ncol(mat)) {
+    if (colnames(mat)[c_idx] != col_sel && mat[fila_sel, c_idx] == "") mat[fila_sel, c_idx] <- "X"
+  }
+  for (r_idx in 1:nrow(mat)) {
+    if (rownames(mat)[r_idx] != fila_sel && mat[r_idx, col_sel] == "") mat[r_idx, col_sel] <- "X"
+  }
+  return(mat)
+}
+
+# --- Definición de los Pasos de Solución (basado en la solución proporcionada) ---
+pasos_solucion_edad <- list(
+  list(
+    descripcion_html = "<b>Estado Inicial:</b> Sin asignaciones. Edades entre 91-99.",
+    cambios_mat = list(), cambios_edad = list()
+  ),
+  list(
+    descripcion_html = "<b>Análisis de Extremos (P1, P2, P4):</b><br>
+                      - P1: Carmen no es la mayor ni la menor (intermedia).<br>
+                      - P2: Sara no es la mayor ni la menor (intermedia).<br>
+                      - P4: Susana no es la mayor ni la menor.<br>
+                      - Por lo tanto, ni Carmen, ni Sara, ni Susana son la mayor o la menor.<br>
+                      - Los extremos (mayor y menor) deben ser Ana y Luisa.",
+    cambios_mat = list(), cambios_edad = list() # Deducción, no cambio directo aún
+  ),
+  list(
+    descripcion_html = "<b>Pista 3 (Paridad de Edades):</b> 4 edades son pares, 1 es impar (la de Sra. Vázquez).<br>
+                      - Edades pares posibles en el rango 91-99: 92, 94, 96, 98. Estas deben ser las 4 edades pares.<br>
+                      - Edad impar de Sra. Vázquez: debe ser una de 91, 93, 95, 97, 99.",
+    cambios_mat = list(), cambios_edad = list()
+  ),
+  list(
+    descripcion_html = "<b>Pista 5 (Progresión Aritmética):</b> Ana < Larra < Parra, y Larra - Ana = Parra - Larra.<br>
+                      Esto significa que las edades de Ana, Sra. Larra y Sra. Parra forman una progresión aritmética.<br>
+                      Dado que 4 edades son (92, 94, 96, 98), estas tres deben ser parte de este conjunto si son pares.<br>
+                      - Posibles progresiones con 3 números pares: (92, 94, 96) o (94, 96, 98).<br>
+                      - Ana no puede tener 91 (Pista 5 implicaría que Larra es impar o Parra > 99 si Larra es par).<br>
+                      - Si Ana=92, Larra=94, Parra=96. El conjunto total es (91/93/95/97/99), 92, 94, 96, 98.
+                      - Si Ana=94, Larra=96, Parra=98. El conjunto total es (91/93/95/97/99), 92, 94, 96, 98.
+                      - La solución dice: 'Ana no puede tener 91, ya que eso requeriría otra edad impar'.
+                      - Asignaciones: Ana = 92, Sra. Larra = 94, Sra. Parra = 96.
+                      - Edades en juego: 92(Ana), 94(Larra), 96(Parra), 98(Luisa, la mayor), y la edad impar de Sra. Vázquez.",
+    cambios_mat = list(), # Aún no asignamos apellidos
+    cambios_edad = list(
+      list(tipo = "Nombre", persona = "Ana", edad = 92)
+      # Implícito: Sra. Larra = 94, Sra. Parra = 96, Luisa (Mayor) = 98
+    )
+  ),
+  list(
+    descripcion_html = "<b>Deducción (Luisa y Ana):</b> De P1, P2, P4, los extremos son Ana y Luisa.
+                      Ya que Ana = 92, y sabemos que la otra edad par extrema es 98.
+                      <b>Luisa es la mayor y tiene 98 años. Ana es la más joven (de las asignadas) con 92.</b>",
+    cambios_mat = list(),
+    cambios_edad = list(
+      list(tipo = "Nombre", persona = "Luisa", edad = 98)
+    )
+  ),
+  list(
+    descripcion_html = "<b>Identificación de Sra. Vázquez (P3):</b> 'Ana no es la señora Bravo (P1 y P2), ni la señora Larra o la señora Parra (P5). No puede ser tampoco la señora Vázquez, cuyo número de años es impar (P3). Por consiguiente, es la señora Gómez.'<br>
+                       - Ana ≠ Bravo, Ana ≠ Larra, Ana ≠ Parra, Ana ≠ Vázquez. Entonces Ana = Gómez.<br>
+                       - Sra. Vázquez tiene la edad impar. Edad impar restante = 95. Entonces Sra. Vázquez = 95.",
+    cambios_mat = list(
+      list(persona = "Ana", apellido = "Gómez", valor = "•")
+    ),
+    cambios_edad = list(
+      list(tipo = "Apellido", persona = "Gómez", edad = 92), # Porque Ana=Gómez y Ana=92
+      list(tipo = "Apellido", persona = "Vázquez", edad = 95)
+    )
+  ),
+  list(
+    descripcion_html = "<b>Identificación de Sras. Larra y Parra (P5):</b>
+                      - Sra. Larra = 94 años.<br>
+                      - Sra. Parra = 96 años.",
+    cambios_mat = list(),
+    cambios_edad = list(
+      list(tipo = "Apellido", persona = "Larra", edad = 94),
+      list(tipo = "Apellido", persona = "Parra", edad = 96)
+    )
+  ),
+  list(
+    descripcion_html = "<b>Identificación de Sra. Bravo:</b> La única edad par restante es 98 (Luisa).
+                      La Sra. Bravo es la única Sra. con apellido sin edad asignada directa y sabemos que Luisa=98.
+                      <b>Sra. Bravo = 98 años. Y como Luisa=98, entonces Luisa = Sra. Bravo.</b>",
+    cambios_mat = list(
+      list(persona = "Luisa", apellido = "Bravo", valor = "•")
+    ),
+    cambios_edad = list(
+      list(tipo = "Apellido", persona = "Bravo", edad = 98)
+    )
+  ),
+  # A este punto, ApellidoEdad_val está completo: Bravo(98), Gómez(92), Larra(94), Parra(96), Vázquez(95)
+  # NombreEdad_val: Ana(92), Luisa(98)
+  list(
+    descripcion_html = "<b>Pista 1 y Pista 2 (Carmen y Sara):</b>
+                      - P1: Edad Carmen es intermedia entre Bravo(98) y Gómez(92). Carmen está entre 92 y 98.<br>
+                      - P2: Gómez(92) < Sara < Carmen.<br>
+                      - De las edades restantes (94, 95, 96):<br>
+                      - Si Carmen=96, entonces 92 < Sara < 96. Sara podría ser 94 o 95.<br>
+                      - Si Carmen=95 (Sra. Vázquez), entonces 92 < Sara < 95. Sara=94 (Sra. Larra).<br>
+                      - Si Carmen=94 (Sra. Larra), entonces 92 < Sara < 94. Imposible para Sara.<br>
+                      - La solución dice: <b>Carmen tiene 95 (Sra. Vázquez) y Sara es la señora Larra (94).</b>
+                      - Esto cumple: Gómez(92) < Sara/Larra(94) < Carmen/Vázquez(95). Y Carmen/Vázquez(95) está entre Gómez(92) y Bravo(98).",
+    cambios_mat = list(
+      list(persona = "Carmen", apellido = "Vázquez", valor = "•"),
+      list(persona = "Sara", apellido = "Larra", valor = "•")
+    ),
+    cambios_edad = list(
+      list(tipo = "Nombre", persona = "Carmen", edad = 95),
+      list(tipo = "Nombre", persona = "Sara", edad = 94)
+    )
+  ),
+  list(
+    descripcion_html = "<b>Susana (Eliminación):</b> La única persona y apellido restantes.<br>
+                      - Nombre: Susana. Apellido: Parra. Edad: 96.<br>
+                      - P4: Susana (96) no es ni mayor (98) ni menor (92). Esto es consistente.",
+    cambios_mat = list(
+      list(persona = "Susana", apellido = "Parra", valor = "•")
+    ),
+    cambios_edad = list(
+      list(tipo = "Nombre", persona = "Susana", edad = 96)
+    )
+  ),
+  list(
+    descripcion_html = "<b>¡Problema Resuelto!</b> Todas las asignaciones completas.",
+    cambios_mat = list(), cambios_edad = list()
+  )
+)
+
+# --- UI de la Aplicación ---
+ui <- fluidPage(
+  theme = shinytheme("cerulean"), # Cambiado el tema
+  titlePanel("Resolución Interactiva: La Edad Dorada"),
+  sidebarLayout(
+    sidebarPanel(
+      width = 4,
+      h4("Controles"),
+      actionButton("btn_reiniciar_e", "Reiniciar", icon = icon("refresh"), class = "btn-danger btn-sm"),
+      actionButton("btn_siguiente_e", "Siguiente Paso", icon = icon("arrow-right"), class = "btn-primary btn-sm"),
+      actionButton("btn_resolver_todo_e", "Resolver Completo", icon = icon("check-double"), class = "btn-success btn-sm"),
+      hr(),
+      h4("Enunciado:"),
+      wellPanel(style = "background-color: #eaf2f8; font-size: 0.85em; max-height: 200px; overflow-y: auto;", texto_problema_html_edad),
+      hr(),
+      h4("Pistas:"),
+      wellPanel(style = "background-color: #eaf2f8; font-size: 0.85em; max-height: 200px; overflow-y: auto;", pistas_html_edad)
+    ),
+    mainPanel(
+      width = 8,
+      h4(htmlOutput("titulo_paso_actual_e")),
+      hr(),
+      fluidRow(
+        column(6, h5("Nombre - Apellido"), DTOutput("grid_NombreApellido_e")),
+        column(6, h5("Edades Asignadas"), verbatimTextOutput("texto_edades_asignadas_e"))
+      )
+    )
+  )
+)
+
+# --- Lógica del Servidor ---
+server <- function(input, output, session) {
+  rv_e <- reactiveValues(
+    matrices = inicializar_matrices_edad(),
+    paso_actual_idx = 0,
+    solucion_texto = "La solución aparecerá aquí como resumen de edades."
+  )
+  
+  aplicar_cambios_y_propagar_e <- function(matrices_actuales, cambios_mat_paso, cambios_edad_paso) {
+    mats <- matrices_actuales
+    # Aplicar cambios a la matriz NombreApellido
+    for (cambio in cambios_mat_paso) {
+      if (cambio$valor == "•") {
+        mats$NombreApellido[cambio$persona, cambio$apellido] <- "•"
+        mats$NombreApellido <- marcar_xes_auto_edad(mats$NombreApellido, cambio$persona, cambio$apellido)
+      } else {
+        mats$NombreApellido[cambio$persona, cambio$apellido] <- "X"
+      }
+    }
+    # Aplicar cambios a los vectores de edad
+    for (cambio_e in cambios_edad_paso) {
+      if (cambio_e$tipo == "Nombre") {
+        mats$NombreEdad_val[cambio_e$persona] <- cambio_e$edad
+      } else if (cambio_e$tipo == "Apellido") {
+        mats$ApellidoEdad_val[cambio_e$persona] <- cambio_e$edad
+      }
+    }
+    
+    # Propagación: Si Nombre=Apellido y Nombre=Edad => Apellido=Edad (y viceversa)
+    made_change <- TRUE
+    while(made_change) {
+      made_change <- FALSE
+      for(np in nombres_propios_edad){
+        if(!is.na(mats$NombreEdad_val[np])){ # Si Nombre tiene edad
+          for(ap in apellidos_edad){
+            if(mats$NombreApellido[np, ap] == "•"){ # Si Nombre está con Apellido
+              if(is.na(mats$ApellidoEdad_val[ap])){ # Y Apellido no tiene edad
+                mats$ApellidoEdad_val[ap] <- mats$NombreEdad_val[np]
+                made_change <- TRUE
+              }
+            }
+          }
+        }
+      }
+      for(ap in apellidos_edad){
+        if(!is.na(mats$ApellidoEdad_val[ap])){ # Si Apellido tiene edad
+          for(np in nombres_propios_edad){
+            if(mats$NombreApellido[np, ap] == "•"){ # Si Apellido está con Nombre
+              if(is.na(mats$NombreEdad_val[np])){ # Y Nombre no tiene edad
+                mats$NombreEdad_val[np] <- mats$ApellidoEdad_val[ap]
+                made_change <- TRUE
+              }
+            }
+          }
+        }
+      }
+    }
+    return(mats)
+  }
+  
+  observeEvent(input$btn_siguiente_e, {
+    if (rv_e$paso_actual_idx < length(pasos_solucion_edad)) {
+      rv_e$paso_actual_idx <- rv_e$paso_actual_idx + 1
+      paso_actual <- pasos_solucion_edad[[rv_e$paso_actual_idx]]
+      rv_e$matrices <- aplicar_cambios_y_propagar_e(rv_e$matrices, paso_actual$cambios_mat, paso_actual$cambios_edad)
+    }
+    actualizar_solucion_final_e()
+  })
+  
+  observeEvent(input$btn_resolver_todo_e, {
+    temp_matrices <- inicializar_matrices_edad()
+    for (i in 1:length(pasos_solucion_edad)) {
+      paso <- pasos_solucion_edad[[i]]
+      temp_matrices <- aplicar_cambios_y_propagar_e(temp_matrices, paso$cambios_mat, paso$cambios_edad)
+    }
+    rv_e$matrices <- temp_matrices
+    rv_e$paso_actual_idx <- length(pasos_solucion_edad)
+    actualizar_solucion_final_e()
+  })
+  
+  observeEvent(input$btn_reiniciar_e, {
+    rv_e$matrices <- inicializar_matrices_edad()
+    rv_e$paso_actual_idx <- 0
+    rv_e$solucion_texto <- "La solución aparecerá aquí como resumen de edades."
+  })
+  
+  output$titulo_paso_actual_e <- renderUI({
+    if (rv_e$paso_actual_idx == 0) return(HTML(pasos_solucion_edad[[1]]$descripcion_html))
+    HTML(pasos_solucion_edad[[rv_e$paso_actual_idx]]$descripcion_html)
+  })
+  
+  output$grid_NombreApellido_e <- renderDT({
+    datatable(rv_e$matrices$NombreApellido, rownames = TRUE, options = list(dom = 't', ordering = FALSE, scrollX = TRUE), class = 'cell-border stripe compact hover') %>%
+      formatStyle(columns = 1:ncol(rv_e$matrices$NombreApellido), target = 'cell',
+                  backgroundColor = styleEqual(c("X", "•"), c("#fdebd0", "#d5f5e3")), # Naranja claro, Verde claro
+                  fontWeight = styleEqual(c("X", "•"), c("normal", "bold")))
+  })
+  
+  output$texto_edades_asignadas_e <- renderPrint({
+    nombre_info <- paste0(names(rv_e$matrices$NombreEdad_val), ": ", ifelse(is.na(rv_e$matrices$NombreEdad_val), "??", rv_e$matrices$NombreEdad_val))
+    apellido_info <- paste0("Sra. ", names(rv_e$matrices$ApellidoEdad_val), ": ", ifelse(is.na(rv_e$matrices$ApellidoEdad_val), "??", rv_e$matrices$ApellidoEdad_val))
+    cat("Edades por Nombre Propio:\n", paste(nombre_info, collapse = "\n"), "\n\nEdades por Apellido:\n", paste(apellido_info, collapse = "\n"))
+    cat("\n\nResumen Final:\n", rv_e$solucion_texto)
+  })
+  
+  actualizar_solucion_final_e <- function() {
+    if (rv_e$paso_actual_idx == length(pasos_solucion_edad)) {
+      sol_completa <- TRUE
+      info_final <- list()
+      
+      for (np in nombres_propios_edad) {
+        apellido_asignado <- names(which(rv_e$matrices$NombreApellido[np, ] == "•"))
+        edad_asignada_nombre <- rv_e$matrices$NombreEdad_val[np]
+        
+        if (length(apellido_asignado) == 1 && !is.na(edad_asignada_nombre)) {
+          # Verificar consistencia
+          edad_asignada_apellido <- rv_e$matrices$ApellidoEdad_val[apellido_asignado]
+          if (is.na(edad_asignada_apellido) || edad_asignada_nombre != edad_asignada_apellido) {
+            sol_completa <- FALSE; break;
+          }
+          info_final[[np]] <- list(nombre = np, apellido = apellido_asignado, edad = edad_asignada_nombre)
+        } else {
+          sol_completa <- FALSE; break;
+        }
+      }
+      
+      if (sol_completa && length(info_final) == length(nombres_propios_edad)) {
+        # Ordenar por edad para el resumen final
+        info_final_sorted <- info_final[order(sapply(info_final, function(p) p$edad))]
+        
+        sol_lines <- sapply(info_final_sorted, function(p) {
+          paste0(p$nombre, " ", p$apellido, ", ", p$edad, " años.")
+        })
+        rv_e$solucion_texto <- paste(sol_lines, collapse = "\n")
+      } else {
+        rv_e$solucion_texto <- "Solución incompleta o inconsistente."
+      }
+    } else {
+      rv_e$solucion_texto <- "La solución aparecerá aquí como resumen de edades."
+    }
+  }
+  
+}
+
+# --- Ejecutar la Aplicación ---
+shinyApp(ui = ui, server = server)
+        <div id="debug-info"></div>
+    </div>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Dimensiones</h5>
+                        <div class="row">
+                            <div class="col-6">
+                                <label>Filas:</label>
+                                <input type="number" id="gjRows" class="form-control" value="3" min="1" max="10">
+                            </div>
+                            <div class="col-6">
+                                <label>Columnas:</label>
+                                <input type="number" id="gjCols" class="form-control" value="3" min="1" max="10">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary mt-2" onclick="testInit()">Inicializar</button>
+                        <button class="btn btn-secondary mt-2" onclick="testGenerate()">Generar Matriz</button>
+                    </div>
+                </div>
+                
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Matriz Inputs</h5>
+                        <div id="gjMatrixInputs"></div>
+                    </div>
+                </div>
+                
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Operaciones</h5>
+                        <select id="gjOperationType" class="form-select">
+                            <option value="multiply">Multiplicar</option>
+                            <option value="add">Sumar</option>
+                            <option value="swap">Intercambiar</option>
+                        </select>
+                        <div id="gjOperationInputs" class="mt-2"></div>
+                        <button class="btn btn-success mt-2" onclick="testApply()">Aplicar</button>
+                        <button class="btn btn-warning mt-2" onclick="testUndo()">Deshacer</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Matriz Original</h5>
+                        <div id="gjAugmentedMatrix" class="border p-3">Sistema no cargado</div>
+                    </div>
+                </div>
+                
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Matriz Actual</h5>
+                        <div id="gjCurrentMatrix" class="border p-3">No hay matriz</div>
+                    </div>
+                </div>
+                
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Historial</h5>
+                        <div id="gjOperationHistory" class="border p-3">No hay operaciones</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/matrices.js"></script>
+    <script src="js/gauss-jordan.js"></script>
+    <script>
+        function updateDebugInfo() {
+            const debugDiv = document.getElementById('debug-info');
+            let info = '';
+            
+            info += `<p><strong>window.app existe:</strong> ${typeof window.app !== 'undefined'}</p>`;
+            if (typeof window.app !== 'undefined') {
+                info += `<p><strong>app.gaussJordan existe:</strong> ${typeof app.gaussJordan !== 'undefined'}</p>`;
+                if (typeof app.gaussJordan !== 'undefined') {
+                    info += `<p><strong>app.gaussJordan.init existe:</strong> ${typeof app.gaussJordan.init === 'function'}</p>`;
+                    info += `<p><strong>Dimensiones actuales:</strong> ${app.gaussJordan.rows}x${app.gaussJordan.cols}</p>`;
+                    info += `<p><strong>Matriz length:</strong> ${app.gaussJordan.matrix.length}</p>`;
+                    info += `<p><strong>Steps length:</strong> ${app.gaussJordan.steps.length}</p>`;
+                }
+            }
+            
+            info += `<p><strong>MathJax disponible:</strong> ${typeof MathJax !== 'undefined'}</p>`;
+            
+            debugDiv.innerHTML = info;
+        }
+        
+        function testInit() {
+            console.log('=== TEST INIT ===');
+            updateDebugInfo();
+            if (typeof app.gaussJordan !== 'undefined' && app.gaussJordan.init) {
+                app.gaussJordan.init();
+                console.log('Init ejecutado');
+                setTimeout(updateDebugInfo, 500);
+            } else {
+                console.error('app.gaussJordan.init no disponible');
+            }
+        }
+        
+        function testGenerate() {
+            console.log('=== TEST GENERATE ===');
+            if (typeof app.gaussJordan !== 'undefined' && app.gaussJordan.generateMatrix) {
+                app.gaussJordan.generateMatrix();
+                console.log('Generate ejecutado');
+                setTimeout(updateDebugInfo, 500);
+            } else {
+                console.error('app.gaussJordan.generateMatrix no disponible');
+            }
+        }
+        
+        function testApply() {
+            console.log('=== TEST APPLY ===');
+            if (typeof app.gaussJordan !== 'undefined' && app.gaussJordan.applyOperation) {
+                app.gaussJordan.applyOperation();
+                console.log('Apply ejecutado');
+                setTimeout(updateDebugInfo, 500);
+            } else {
+                console.error('app.gaussJordan.applyOperation no disponible');
+            }
+        }
+        
+        function testUndo() {
+            console.log('=== TEST UNDO ===');
+            if (typeof app.gaussJordan !== 'undefined' && app.gaussJordan.undoOperation) {
+                app.gaussJordan.undoOperation();
+                console.log('Undo ejecutado');
+                setTimeout(updateDebugInfo, 500);
+            } else {
+                console.error('app.gaussJordan.undoOperation no disponible');
+            }
+        }
+        
+        // Configurar MathJax
+        MathJax.Hub.Config({
+            tex2jax: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+            CommonHTML: { linebreaks: { automatic: true } },
+            "HTML-CSS": { linebreaks: { automatic: true } },
+            SVG: { linebreaks: { automatic: true } }
+        });
+        
+        // Inicializar al cargar
+        document.addEventListener('DOMContentLoaded', () => {
+            updateDebugInfo();
+            console.log('Debug page loaded');
+        });
+    </script>
+</body>
+</html>
