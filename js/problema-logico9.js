@@ -246,7 +246,7 @@ function resolverCompleto9() {
 function loadProblemaLogico9() {
     const toolContent = document.getElementById('tool-content');
     toolContent.innerHTML = `
-        <div class="problema-logico-9-container">
+        <div class="problema-logico9-container">
             <h1>Problema Lógico Nueve: Las Consultas Médicas</h1>
             
             <div class="problema-layout">
@@ -320,14 +320,14 @@ function loadProblemaLogico9() {
 }
 
 function mostrarMatriz9(tipo) {
-    document.querySelectorAll('.problema-logico-9-container .tab-btn').forEach(btn => {
+    document.querySelectorAll('.problema-logico9-container .tab-btn').forEach(btn => {
         btn.classList.remove('active');
     });
     
-    document.querySelectorAll('.problema-logico-9-container .matriz-content').forEach(content => {
+    document.querySelectorAll('.problema-logico9-container .matriz-content').forEach(content => {
         content.classList.remove('active');
     });
     
-    document.querySelector(`.problema-logico-9-container .tab-btn[onclick="mostrarMatriz9('${tipo}')"]`).classList.add('active');
+    document.querySelector(`.problema-logico9-container .tab-btn[onclick="mostrarMatriz9('${tipo}')"]`).classList.add('active');
     document.getElementById(`matriz-${tipo}-9`).classList.add('active');
 }

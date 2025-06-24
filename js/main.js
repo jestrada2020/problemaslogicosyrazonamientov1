@@ -129,12 +129,12 @@ const app = {
         } else if(tool === 'introduccion1') {
             content = `
             <h3>Introducción a la Caja de Herramientas</h3>
-            <p>Hace algún tiempo el profesor Carlos Andrés Escobar Guerra propuso la creación de unas cartillas para los cursos de matemáticas de la facultad de Ciencias y Biotecnología, la elaboración de las cartillas produjo la necesidad de tener las herramientas para desarrollar las actividades de dicha cartilla.</p>
-            <p>Así es que se llegó a la creación de una caja de herramientas donde se encontraran aplicaciones de aritmética, matemáticas I, II y III, y aplicaciones más avanzadas, la caja de herramientas hace más dinámica la clase, hace que los estudiantes adquieran los saberes esenciales más rápidamente, depende del profesor y de los estudiantes no pasar por alto los detalles que conducen a la solución.</p>
-            <p>Para solucionar muchos de los ejercicios y problemas no es necesario ser un gran estudiante en matemáticas, eso sí, debe saber interiorizar, entender los conceptos que ayudan a solucionar el problema y en la caja de herramientas encontrará los instrumentos que le ayudaran a solucionar los problemas; depende del alumno escoger la herramienta adecuada.</p>
-            <p>Otra gran ventaja de esta caja de herramientas es que todas las aplicaciones están reunidas en un solo espacio virtual, pensadas y diseñadas especialmente para responder a las necesidades de nuestros estudiantes.</p>
-            <p>Para su desarrollo, se utilizó tecnologías como R, LaTeX, Flexdashboard, Bookdown, Shiny y GeoGebra. El diseño visual de la página fue trabajado con HTML y CSS, y para hacerla más interactiva y dinámica incorporamos JavaScript.</p>
-            <p>Se puede decir que el equipo de trabajo está conformado por el profesor Carlos Andrés Escobar Guerra, Pablo Andrés Guzmán, John Jairo Estrada Álvarez y Juan Albero Arias Quiceno. Gracias a la invaluable ayuda del profesor de estadística y programación Pablo Andrés Guzmán puesto que él inspiró la creación de un grupo de estudio en el cual compartía sus conocimientos de R, de otros programas y actualmente da su opinión acerca de las nuevas aplicaciones. John Jairo Estrada, el cerebro del proyecto, es el programador de todas las aplicaciones.</p>`;
+            <p>Hace algún tiempo, el profesor Carlos Andrés Escobar Guerra propuso la creación de unas cartillas para los cursos de matemáticas de la Facultad de Ciencias y Biotecnología. Estas cartillas no solo organizaron los contenidos esenciales, sino que también generaron la necesidad de contar con herramientas prácticas que permitieran desarrollar las actividades propuestas de manera interactiva y significativa.</p>
+            <p>Resolver muchos de los problemas propuestos en la cartilla —y en especial los problemas de ingenio— no requiere ser un experto en matemáticas, sino tener disposición para razonar con sentido común, comprender los conceptos esenciales y elegir adecuadamente la herramienta más apropiada. La caja de herramientas ofrece precisamente ese conjunto de instrumentos para facilitar este proceso: gráficos, visualizaciones, y aplicaciones interactivas que acompañan y guían la solución de problemas.</p>
+            <p>Estos problemas de lógica o pasatiempos matemáticos están cuidadosamente seleccionados para fomentar la deducción, el pensamiento crítico y el ordenamiento de datos relacionados. En cada uno se ofrecen todas las pistas necesarias para llegar a una solución clara, apelando más al razonamiento que al conocimiento técnico especializado. El objetivo es que el estudiante experimente la satisfacción de descubrir soluciones a través de la observación, el análisis y el uso de estrategias inteligentes.</p>
+            <p>La construcción de esta herramienta fue posible gracias al esfuerzo conjunto de un equipo comprometido con la innovación educativa. Participaron en su desarrollo los profesores Carlos Andrés Escobar Guerra, Pablo Andrés Guzmán, Juan Alberto Arias Quiceno y John Jairo Estrada Álvarez. En particular, el profesor Guzmán aportó su experiencia en estadística y programación, inspirando la creación de un grupo de estudio que ha sido clave en la evolución del proyecto. Por su parte, John Jairo Estrada, el verdadero motor técnico, se encargó de programar todas las aplicaciones, integrando tecnologías como R, LaTeX, Shiny, Flexdashboard, Bookdown y GeoGebra, junto con un diseño visual elaborado en HTML, CSS y JavaScript.</p>
+            <p>Esta iniciativa no solo representa una valiosa contribución al aprendizaje de las matemáticas, sino también un ejemplo claro de cómo el trabajo colaborativo, la creatividad y el uso adecuado de la tecnología pueden transformar la educación. Invitamos a cada estudiante a sumergirse en esta experiencia, a resolver con entusiasmo los problemas propuestos, y a disfrutar del desafío intelectual que cada uno de ellos representa.</p>
+            <p> </p>`;
             toolContent.innerHTML = content;
         /* 
         
@@ -315,6 +315,16 @@ const app = {
             loadProblemaLogico9();
         } else if(tool === 'problemaLogico10') {
             loadProblemaLogico10();
+        } else if(tool === 'problemaLogico11') {
+            loadProblemaLogico11();
+        } else if(tool === 'problemaLogico12') {
+            loadProblemaLogico12();
+        } else if(tool === 'problemaLogico13') {
+            loadProblemaLogico13();
+        } else if(tool === 'problemaLogico14') {
+            loadProblemaLogico14();
+        } else if(tool === 'problemaLogico15') {
+            loadProblemaLogico15();
         }
         
         if (typeof MathJax !== "undefined" && MathJax.Hub) {

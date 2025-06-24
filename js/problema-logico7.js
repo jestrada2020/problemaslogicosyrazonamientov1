@@ -253,7 +253,7 @@ function resolverCompleto7() {
 function loadProblemaLogico7() {
     const toolContent = document.getElementById('tool-content');
     toolContent.innerHTML = `
-        <div class="problema-logico-7-container">
+        <div class="problema-logico7-container">
             <h1>Problema Lógico Siete: Partido de Fútbol</h1>
             
             <div class="problema-layout">

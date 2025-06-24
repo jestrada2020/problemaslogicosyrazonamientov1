@@ -127,7 +127,7 @@ class ProblemaLogico6 {
 
     getHTML() {
         return `
-            <div class="edad-dorada-container">
+            <div class="problema-logico6-container">
                 <div class="edad-header">
                     <h2><i class="fas fa-birthday-cake"></i> Problema Lógico Seis: La Edad Dorada</h2>
                     <p class="edad-descripcion">

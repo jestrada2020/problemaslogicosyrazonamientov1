@@ -249,7 +249,7 @@ function resolverCompleto8() {
 function loadProblemaLogico8() {
     const toolContent = document.getElementById('tool-content');
     toolContent.innerHTML = `
-        <div class=\"problema-logico-8-container\">
+        <div class=\"problema-logico8-container\">
             <h1>Problema Lógico Ocho: Muestra de Artes y Oficios</h1>
             <div class=\"problema-layout\">
                 <div class=\"problema-sidebar\">

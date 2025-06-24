@@ -130,7 +130,7 @@ class ProblemaLogico5 {
 
     getHTML() {
         return `
-            <div class="problema-logico-5-container">
+            <div class="problema-logico5-container">
                 <div class="vegas-header">
                     <h2><i class="fas fa-dice"></i> Problema Lógico Cinco: Fin de Semana en Las Vegas</h2>
                     <p class="vegas-descripcion">

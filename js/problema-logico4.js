@@ -140,7 +140,7 @@ class ProblemaLogico4 {
 
     getHTML() {
         return `
-            <div class="problema-logico-container">
+            <div class="problema-logico4-container">
                 <div class="problema-header">
                     <h2><i class="fas fa-users"></i> Problema Lógico Cuatro: Concurso de Baile</h2>
                     <p class="problema-descripcion">

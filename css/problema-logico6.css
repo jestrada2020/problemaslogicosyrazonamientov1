@@ -1,0 +1,269 @@
+/* ======================================================================= */
+/* PROBLEMA LÓGICO 6 - LA EDAD DORADA */
+/* PALETA DORADA ÁMBAR Y CARAMELO */
+/* ======================================================================= */
+
+.problema-logico6-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+    padding: 32px 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+}
+
+.problema-logico6-container h1 {
+    color: #fff;
+    text-align: center;
+    font-size: 2.7rem;
+    margin-bottom: 36px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 4px 24px rgba(255, 152, 0, 0.3);
+}
+
+.problema-logico6-container .problema-header {
+    background: rgba(255,255,255,0.95);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 32px rgba(255, 152, 0, 0.15);
+    border: 1px solid rgba(255, 152, 0, 0.2);
+    text-align: center;
+}
+
+.problema-logico6-container .problema-header h2 {
+    color: #ff9800;
+    font-size: 2.2rem;
+    margin-bottom: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.problema-logico6-container .problema-descripcion {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.problema-logico6-container .pistas-container {
+    background: linear-gradient(135deg, #f57c00 0%, #e65100 100%);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 32px rgba(255, 152, 0, 0.15);
+    border: 1px solid rgba(255, 152, 0, 0.2);
+}
+
+.problema-logico6-container .pistas-container h3 {
+    color: #ffffff;
+    margin-bottom: 16px;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.problema-logico6-container .pistas-grid {
+    display: grid;
+    gap: 12px;
+}
+
+.problema-logico6-container .pista-item {
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8ebff 100%);
+    border-radius: 10px;
+    padding: 16px;
+    border-left: 4px solid #ff9800;
+    transition: all 0.3s ease;
+    color: #2c3e50;
+    line-height: 1.5;
+}
+
+.problema-logico6-container .pista-item.pista-usada {
+    background: linear-gradient(135deg, #d5f4e6 0%, #c3f0d3 100%);
+    border-left-color: #27ae60;
+    opacity: 0.8;
+}
+
+.problema-logico6-container .matrices-container {
+    background: rgba(255,255,255,0.95);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 32px rgba(255, 152, 0, 0.15);
+    border: 1px solid rgba(255, 152, 0, 0.2);
+}
+
+.problema-logico6-container .edades-container {
+    background: rgba(255,255,255,0.95);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 32px rgba(255, 152, 0, 0.15);
+    border: 1px solid rgba(255, 152, 0, 0.2);
+}
+
+.problema-logico6-container .edades-container h3 {
+    color: #ff9800;
+    margin-bottom: 16px;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.problema-logico6-container .edades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+}
+
+.problema-logico6-container .edad-item {
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8ebff 100%);
+    border-radius: 10px;
+    padding: 16px;
+    border: 2px solid rgba(255, 152, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.problema-logico6-container .edad-item.asignada {
+    border-color: #27ae60;
+    background: linear-gradient(135deg, #d5f4e6 0%, #c3f0d3 100%);
+}
+
+.problema-logico6-container .controles-container {
+    background: rgba(255,255,255,0.95);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(255, 152, 0, 0.15);
+    border: 1px solid rgba(255, 152, 0, 0.2);
+}
+
+.problema-logico6-container .controles-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.problema-logico6-container .btn-control {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.problema-logico6-container .btn-reiniciar {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+.problema-logico6-container .btn-siguiente {
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+}
+
+.problema-logico6-container .btn-resolver {
+    background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+}
+
+.problema-logico6-container .btn-control:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    filter: brightness(1.1);
+}
+
+/* Tablas/Matrices */
+.problema-logico6-container table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(255, 152, 0, 0.1);
+    margin: 16px 0;
+}
+
+.problema-logico6-container table th,
+.problema-logico6-container table td {
+    border: 2px solid #e3e6f0;
+    padding: 12px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.problema-logico6-container table th {
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+    color: white;
+    font-weight: 600;
+}
+
+.problema-logico6-container table td {
+    background: #f8f9ff;
+    transition: background-color 0.3s ease;
+}
+
+.problema-logico6-container table td:hover {
+    background: #e8ebff;
+}
+
+.problema-logico6-container .solucion-final {
+    background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 24px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(39, 174, 96, 0.2);
+}
+
+.problema-logico6-container .paso-descripcion {
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8ebff 100%);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 24px;
+    border-left: 4px solid #ff9800;
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .problema-logico6-container {
+        padding: 20px 16px;
+    }
+    
+    .problema-logico6-container h1 {
+        font-size: 2.2rem;
+        margin-bottom: 25px;
+    }
+    
+    .problema-logico6-container .controles-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .problema-logico6-container .btn-control {
+        justify-content: center;
+    }
+    
+    .problema-logico6-container .edades-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .problema-logico6-container table th,
+    .problema-logico6-container table td {
+        padding: 8px 6px;
+        font-size: 0.9rem;
+    }
+}

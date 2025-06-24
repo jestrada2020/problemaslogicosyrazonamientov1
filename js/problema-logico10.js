@@ -334,7 +334,7 @@ function resolverCompleto10() {
 function loadProblemaLogico10() {
     const toolContent = document.getElementById('tool-content');
     toolContent.innerHTML = `
-        <div class="problema-logico-10-container">
+        <div class="problema-logico10-container">
             <h1>Problema Lógico Diez: Las Vacaciones</h1>
             
             <div class="problema-layout">
@@ -408,14 +408,14 @@ function loadProblemaLogico10() {
 }
 
 function mostrarMatriz10(tipo) {
-    document.querySelectorAll('.problema-logico-10-container .tab-btn').forEach(btn => {
+    document.querySelectorAll('.problema-logico10-container .tab-btn').forEach(btn => {
         btn.classList.remove('active');
     });
     
-    document.querySelectorAll('.problema-logico-10-container .matriz-content').forEach(content => {
+    document.querySelectorAll('.problema-logico10-container .matriz-content').forEach(content => {
         content.classList.remove('active');
     });
     
-    document.querySelector(`.problema-logico-10-container .tab-btn[onclick="mostrarMatriz10('${tipo}')"]`).classList.add('active');
+    document.querySelector(`.problema-logico10-container .tab-btn[onclick="mostrarMatriz10('${tipo}')"]`).classList.add('active');
     document.getElementById(`matriz-${tipo}-10`).classList.add('active');
 }

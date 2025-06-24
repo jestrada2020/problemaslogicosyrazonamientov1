@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Test de Funcionalidad</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+    <div id="test-output"></div>
+    
+    <!-- Cargar archivos en el orden correcto -->
+    <script src="js/matrices.js"></script>
+    <script src="js/problema-logico.js"></script>
+    <script src="js/determinantes.js"></script>
+    <script src="js/gauss-jordan.js"></script>
+    <script src="js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const output = document.getElementById('test-output');
+            let testResults = [];
+            
+            // Test 1: Verificar que las funciones básicas existen
+            testResults.push('=== TEST DE FUNCIONES ===');
+            testResults.push(`app object exists: ${typeof app === 'object'}`);
+            testResults.push(`problemaLogico exists: ${typeof problemaLogico === 'object'}`);
+            testResults.push(`generateMatrixInputsSum exists: ${typeof generateMatrixInputsSum === 'function'}`);
+            testResults.push(`initializeDeterminantTool exists: ${typeof initializeDeterminantTool === 'function'}`);
+            testResults.push(`formatNumberForLatex exists: ${typeof formatNumberForLatex === 'function'}`);
+            testResults.push(`formatNumberForLatexSimple exists: ${typeof formatNumberForLatexSimple === 'function'}`);
+            
+            // Test 2: Verificar MathJax
+            testResults.push('');
+            testResults.push('=== TEST DE MATHJAX ===');
+            testResults.push(`MathJax exists: ${typeof MathJax !== 'undefined'}`);
+            if (typeof MathJax !== 'undefined') {
+                testResults.push(`MathJax.Hub exists: ${typeof MathJax.Hub !== 'undefined'}`);
+            }
+            
+            // Test 3: Test de función de formato
+            testResults.push('');
+            testResults.push('=== TEST DE FORMATO ===');
+            if (typeof formatNumberForLatexSimple === 'function') {
+                testResults.push(`formatNumberForLatexSimple(0.5): ${formatNumberForLatexSimple(0.5)}`);
+                testResults.push(`formatNumberForLatexSimple(2): ${formatNumberForLatexSimple(2)}`);
+                testResults.push(`formatNumberForLatexSimple(3.14159): ${formatNumberForLatexSimple(3.14159)}`);
+            }
+            
+            output.innerHTML = '<pre>' + testResults.join('\n') + '</pre>';
+        });
+    </script>
+</body>
+</html>
