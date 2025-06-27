@@ -9,16 +9,49 @@
     grid-template-rows: auto 1fr;
     gap: 24px;
     min-height: 100vh;
-    padding: 20px;
-    background: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
-    color: #1a1a1a;
+    padding: 32px 20px;
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
     grid-template-areas:
         "sidebar header"
         "sidebar main";
 }
 
-/* Header */
+/* Header con botón de menú */
+.problema-logico6-container .problem-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.problema-logico6-container .menu-button {
+    background: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 4px rgba(243, 156, 18, 0.3);
+    flex-shrink: 0;
+}
+
+.problema-logico6-container .menu-button:hover {
+    background: #e67e22;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(243, 156, 18, 0.4);
+}
+
 .problema-logico6-container .edad-header {
     grid-area: header;
     background: #ffffff;
@@ -26,6 +59,7 @@
     border-radius: 8px;
     padding: 24px;
     text-align: left;
+    flex: 1;
 }
 
 .problema-logico6-container .edad-header h2 {

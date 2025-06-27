@@ -10,6 +10,39 @@
     color: #2c3e50;
 }
 
+/* Header con botón de menú */
+.problema-logico10-container .problem-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 36px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.problema-logico10-container .menu-button {
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+}
+
+.problema-logico10-container .menu-button:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.4);
+}
+
 .problema-logico10-container h1 {
     color: #fff;
     text-align: center;

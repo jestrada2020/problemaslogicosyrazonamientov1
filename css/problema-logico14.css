@@ -10,6 +10,39 @@
     color: #1a1a1a;
 }
 
+/* Header con botón de menú */
+.problema-logico-14 .problem-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.problema-logico-14 .menu-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+}
+
+.problema-logico-14 .menu-button:hover {
+    background: #0056b3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
 .problema-logico-14 .main-title {
     color: #1a1a1a;
     text-align: left;

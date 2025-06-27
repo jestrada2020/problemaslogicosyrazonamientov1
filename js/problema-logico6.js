@@ -128,22 +128,27 @@ class ProblemaLogico6 {
     getHTML() {
         return `
             <div class="problema-logico6-container">
-                <div class="edad-header">
-                    <h2><i class="fas fa-birthday-cake"></i> Problema Lógico Seis: La Edad Dorada</h2>
-                    <p class="edad-descripcion">
-                        Cinco mujeres jubiladas (Ana, Carmen, Luisa, Sara, Susana) tienen entre 91 y 99 años.
-                        No hay dos con la misma edad. Todas las edades son números enteros.
-                        El objetivo es encontrar el nombre completo y la edad de cada una.
-                    </p>
-                    <div class="participantes-edad-info">
-                        <div class="edad-info-grupo">
-                            <strong>Nombres:</strong> Ana, Carmen, Luisa, Sara, Susana
-                        </div>
-                        <div class="edad-info-grupo">
-                            <strong>Apellidos:</strong> Bravo, Gómez, Larra, Parra, Vázquez
-                        </div>
-                        <div class="edad-info-grupo">
-                            <strong>Rango de edades:</strong> 91 a 99 años (4 pares, 1 impar)
+                <div class="problem-header">
+                    <button class="menu-button" onclick="toggleSidebar()" title="Abrir/Cerrar Menú">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="edad-header">
+                        <h2><i class="fas fa-birthday-cake"></i> Problema Lógico Seis: La Edad Dorada</h2>
+                        <p class="edad-descripcion">
+                            Cinco mujeres jubiladas (Ana, Carmen, Luisa, Sara, Susana) tienen entre 91 y 99 años.
+                            No hay dos con la misma edad. Todas las edades son números enteros.
+                            El objetivo es encontrar el nombre completo y la edad de cada una.
+                        </p>
+                        <div class="participantes-edad-info">
+                            <div class="edad-info-grupo">
+                                <strong>Nombres:</strong> Ana, Carmen, Luisa, Sara, Susana
+                            </div>
+                            <div class="edad-info-grupo">
+                                <strong>Apellidos:</strong> Bravo, Gómez, Larra, Parra, Vázquez
+                            </div>
+                            <div class="edad-info-grupo">
+                                <strong>Rango de edades:</strong> 91 a 99 años (4 pares, 1 impar)
+                            </div>
                         </div>
                     </div>
                 </div>

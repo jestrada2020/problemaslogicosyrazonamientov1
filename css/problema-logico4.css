@@ -4,31 +4,47 @@
 
 .problema-logico4-container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #00bcd4 0%, #0097a7 100%);
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
     padding: 32px 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #2c3e50;
 }
 
 .problema-logico4-container .problema-header {
-    background: rgba(255,255,255,0.98);
-    border-radius: 18px;
-    padding: 28px;
-    margin-bottom: 28px;
-    box-shadow: 0 8px 32px rgba(0, 188, 212, 0.15);
-    border: 1.5px solid rgba(0, 188, 212, 0.2);
-    text-align: center;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.problema-logico4-container .problema-header h2 {
-    color: #00695c;
-    font-size: 2.4rem;
-    margin-bottom: 16px;
-    font-weight: 700;
+.problema-logico4-container .menu-button {
+    background: #9b59b6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 4px rgba(155, 89, 182, 0.3);
+    flex-shrink: 0;
+}
+
+.problema-logico4-container .menu-button:hover {
+    background: #8e44ad;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(155, 89, 182, 0.4);
+}
+
+.problema-logico4-container .problema-header {
+    flex: 1;
 }
 
 .problema-logico4-container .problema-descripcion {

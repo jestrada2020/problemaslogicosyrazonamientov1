@@ -498,7 +498,12 @@ function loadProblemaLogico15() {
     const toolContent = document.getElementById('tool-content');
     toolContent.innerHTML = `
         <div id="problema-logico-15" class="problema-logico15-container">
-            <h1>Los Niños de la Vecindad - Problema Lógico 15</h1>
+            <div class="problem-header">
+                <button class="menu-button" onclick="toggleSidebar()" title="Abrir/Cerrar Menú">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1>Los Niños de la Vecindad - Problema Lógico 15</h1>
+            </div>
             
             <div class="problema-layout">
                 <div class="problema-sidebar">

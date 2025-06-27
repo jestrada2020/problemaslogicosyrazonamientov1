@@ -141,13 +141,18 @@ class ProblemaLogico4 {
     getHTML() {
         return `
             <div class="problema-logico4-container">
-                <div class="problema-header">
-                    <h2><i class="fas fa-users"></i> Problema Lógico Cuatro: Concurso de Baile</h2>
-                    <p class="problema-descripcion">
-                        En un concurso de baile participaron 4 parejas. Los hombres son: Adrián, Benito, César y Daniel. 
-                        Las mujeres son: Ana, Beatriz, Carmen y Diana. Los vestidos de las mujeres son de colores: 
-                        azul, rojo, verde y amarillo. Los premios fueron: 1er lugar, 2do lugar, 3er lugar y 4to lugar.
-                    </p>
+                <div class="problem-header">
+                    <button class="menu-button" onclick="toggleSidebar()" title="Abrir/Cerrar Menú">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="problema-header">
+                        <h2><i class="fas fa-users"></i> Problema Lógico Cuatro: Concurso de Baile</h2>
+                        <p class="problema-descripcion">
+                            En un concurso de baile participaron 4 parejas. Los hombres son: Adrián, Benito, César y Daniel. 
+                            Las mujeres son: Ana, Beatriz, Carmen y Diana. Los vestidos de las mujeres son de colores: 
+                            azul, rojo, verde y amarillo. Los premios fueron: 1er lugar, 2do lugar, 3er lugar y 4to lugar.
+                        </p>
+                    </div>
                 </div>
 
                 <div class="pistas-container">

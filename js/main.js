@@ -1,6 +1,7 @@
 // Aplicación principal
 const app = {
     currentTool: null,
+    sidebarCollapsed: false,
     loadTool: function(tool) {
         // Remove active class from previous button
         if (this.currentTool) {
@@ -11,6 +12,13 @@ const app = {
         const currentButton = document.querySelector(`#sidebar button[onclick="app.loadTool('${tool}')"]`);
         if (currentButton) currentButton.classList.add('active');
         this.currentTool = tool;
+
+        // Auto-collapse sidebar after selecting a tool (except for introduction)
+        if (tool !== 'introduccion1' && !this.sidebarCollapsed) {
+            setTimeout(() => {
+                collapseSidebar();
+            }, 500); // Small delay to see the selection
+        }
 
         const toolContent = document.getElementById('tool-content');
         let content = '';
@@ -138,7 +146,7 @@ const app = {
 <p>De esta visión nació la Caja de Herramientas Matemáticas, una plataforma digital dinámica que reúne en un solo entorno virtual una amplia variedad de aplicaciones para apoyar los cursos de Aritmética, Matemáticas I, II y III, así como temáticas más avanzadas. Esta herramienta no solo facilita el aprendizaje de saberes fundamentales, sino que también estimula el pensamiento lógico, la deducción y la capacidad analítica de los estudiantes.</p>
 <p>En este entorno, los problemas de lógica y pasatiempos matemáticos seleccionados cumplen un propósito esencial: fomentar la observación, el razonamiento estratégico y el uso inteligente de los datos disponibles. No se requiere ser experto en matemáticas, sino tener disposición para pensar con sentido común, comprender conceptos clave y escoger la herramienta adecuada para llegar a soluciones bien fundamentadas. Esta propuesta pedagógica apunta a que los estudiantes experimenten la satisfacción del descubrimiento mediante el análisis crítico.</p>
 <p>La construcción de esta herramienta fue posible gracias al esfuerzo conjunto de un equipo comprometido con la innovación educativa. Destacamos la participación de los profesores Carlos Andrés Escobar Guerra, Pablo Andrés Guzmán, Juan Alberto Arias Quiceno y John Jairo Estrada Álvarez. En particular, Pablo Guzmán aportó sus conocimientos en estadística y programación, fomentando la formación de un grupo de estudio clave en la evolución del proyecto. Por su parte, John Jairo Estrada asumió el liderazgo técnico, integrando tecnologías como R, LaTeX, Shiny, Flexdashboard, Bookdown y GeoGebra, complementadas con un diseño moderno en HTML, CSS y JavaScript.</p>
-<p>Queremos ralizar el reconocimiento como la autora principal de los problemas logicos Rosalind Moore, a la gentileza Guillermo Mejía, al preparador Patricio Barros, y finalmente, rendimos homenaje a los autores cuyas contribuciones han sido fuente de inspiración para esta colección de retos lógicos. Su ingenio, claridad pedagógica y creatividad han dado vida a una experiencia de aprendizaje única. Presentamos a continuación sus nombres con gratitud y reconocimiento:</p>
+<p>Queremos reconocer como autora principal de los problemas lógicos a Rosalind Moore. Agradecemos la gentileza de Guillermo Mejía y la labor del preparador Patricio Barros. De igual manera, rendimos homenaje a los autores que, con su ingenio, claridad pedagógica y creatividad, inspiraron esta colección de retos lógicos y contribuyeron a crear una experiencia de aprendizaje única. Sus nombres se presentan a continuación con gratitud y reconocimiento:</p>
 <p>M. J. Arterberry, Karen J. Allen, Diane C. Baldwin, Frank A. Bauckman, Lois Bohnsack, Haydon Calhoun, Fred H. Dale, Roseann Fairchild, Karen Feinberg, Tara Lynn Fulton, Jean M. Hannagan, Joanne Horton, Carol Johnson, Gary Maeder, Virginia C. McCarthy, Cheryl McLaughlin, Edna M. McNellis, Kathleen A. Misze, W. H. Organ ,Nancy R. Patterson, Mary A. Powell, Evelyn B. Rosenthal, Margaret Ruff, Dodi Schultz, Margaret Shoop / Margaret E. Shoop, Julie Spence, Jennifer Stern, Faye Taylor, Randall L. Whipkey, Diane Yoko</p>
 <p>Gracias a todos ellos, y a cada persona que ha creído en el poder transformador de las matemáticas, por hacer posible este proyecto. Invitamos a los estudiantes a explorar cada desafío con entusiasmo y a disfrutar del proceso de descubrir y razonar, porque el conocimiento que se construye con lógica y pasión permanece para siempre.</p>
             <p> </p>`;
@@ -345,3 +353,53 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM cargado, inicializando aplicación...');
     app.loadTool('introduccion1'); // Cargar la herramienta de introducción por defecto
 });
+
+// Funciones para manejar el sidebar colapsable
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    const toggleBtn = document.getElementById('menu-toggle');
+    const icon = toggleBtn.querySelector('i');
+    
+    if (app.sidebarCollapsed) {
+        // Expandir sidebar
+        sidebar.classList.remove('collapsed');
+        content.classList.remove('sidebar-collapsed');
+        toggleBtn.classList.add('menu-open');
+        icon.className = 'fas fa-times';
+        app.sidebarCollapsed = false;
+    } else {
+        // Colapsar sidebar
+        sidebar.classList.add('collapsed');
+        content.classList.add('sidebar-collapsed');
+        toggleBtn.classList.remove('menu-open');
+        icon.className = 'fas fa-bars';
+        app.sidebarCollapsed = true;
+    }
+}
+
+function collapseSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    const toggleBtn = document.getElementById('menu-toggle');
+    const icon = toggleBtn.querySelector('i');
+    
+    sidebar.classList.add('collapsed');
+    content.classList.add('sidebar-collapsed');
+    toggleBtn.classList.remove('menu-open');
+    icon.className = 'fas fa-bars';
+    app.sidebarCollapsed = true;
+}
+
+function expandSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    const toggleBtn = document.getElementById('menu-toggle');
+    const icon = toggleBtn.querySelector('i');
+    
+    sidebar.classList.remove('collapsed');
+    content.classList.remove('sidebar-collapsed');
+    toggleBtn.classList.add('menu-open');
+    icon.className = 'fas fa-times';
+    app.sidebarCollapsed = false;
+}

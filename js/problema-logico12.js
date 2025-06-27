@@ -332,7 +332,12 @@ function loadProblemaLogico12() {
     const toolContent = document.getElementById('tool-content');
     toolContent.innerHTML = `
         <div class="problema-logico-12">
-            <h1 class="main-title">El Aprendizaje de un Oficio - Problema Lógico 12</h1>
+            <div class="problem-header">
+                <button class="menu-button" onclick="toggleSidebar()" title="Abrir/Cerrar Menú">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="main-title">El Aprendizaje de un Oficio - Problema Lógico 12</h1>
+            </div>
             
             <div class="layout-container">
                 <div class="sidebar-panel">

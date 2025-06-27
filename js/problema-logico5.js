@@ -131,23 +131,27 @@ class ProblemaLogico5 {
     getHTML() {
         return `
             <div class="problema-logico5-container">
-                <div class="vegas-header">
-                    <h2><i class="fas fa-dice"></i> Problema Lógico Cinco: Fin de Semana en Las Vegas</h2>
-                    <p class="vegas-descripcion">
-                        Cuatro parejas de Los Ángeles (Blum, Brown, Steel, Jones) fueron a Las Vegas. 
-                        Dos se alojaron en el Star Hotel, una en el Moon Hotel, y la otra en el Sun Hotel. 
-                        El sábado, cada pareja asistió a una cena con espectáculo. 
-                        Sólo una de ellas vio el espectáculo del hotel en que paraba. 
-                        Los espectáculos se exhibían en el Star Hotel, Moon Hotel, el Hill y el Nero's Castle.
-                    </p>
-                    <div class="participantes-info">
-                        <div class="info-grupo">
-                            <strong>Hombres:</strong> Charles, Eric, John, Max
-                        </div>
-                        <div class="info-grupo">
-                            <strong>Mujeres:</strong> Grace, Irene, Mae, Sarah
-                        </div>
-                        <div class="info-grupo">
+                <div class="problem-header">
+                    <button class="menu-button" onclick="toggleSidebar()" title="Abrir/Cerrar Menú">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="vegas-header">
+                        <h2><i class="fas fa-dice"></i> Problema Lógico Cinco: Fin de Semana en Las Vegas</h2>
+                        <p class="vegas-descripcion">
+                            Cuatro parejas de Los Ángeles (Blum, Brown, Steel, Jones) fueron a Las Vegas. 
+                            Dos se alojaron en el Star Hotel, una en el Moon Hotel, y la otra en el Sun Hotel. 
+                            El sábado, cada pareja asistió a una cena con espectáculo. 
+                            Sólo una de ellas vio el espectáculo del hotel en que paraba. 
+                            Los espectáculos se exhibían en el Star Hotel, Moon Hotel, el Hill y el Nero's Castle.
+                        </p>
+                        <div class="participantes-info">
+                            <div class="info-grupo">
+                                <strong>Hombres:</strong> Charles, Eric, John, Max
+                            </div>
+                            <div class="info-grupo">
+                                <strong>Mujeres:</strong> Grace, Irene, Mae, Sarah
+                            </div>
+                            <div class="info-grupo">
                             <strong>Hoteles:</strong> Star, Moon, Sun
                         </div>
                         <div class="info-grupo">

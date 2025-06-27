@@ -335,7 +335,12 @@ function loadProblemaLogico10() {
     const toolContent = document.getElementById('tool-content');
     toolContent.innerHTML = `
         <div class="problema-logico10-container">
-            <h1>Problema Lógico Diez: Las Vacaciones</h1>
+            <div class="problem-header">
+                <button class="menu-button" onclick="toggleSidebar()" title="Abrir/Cerrar Menú">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1>Problema Lógico Diez: Las Vacaciones</h1>
+            </div>
             
             <div class="problema-layout">
                 <div class="problema-sidebar">

@@ -9,13 +9,47 @@
     grid-template-rows: auto 1fr;
     gap: 24px;
     min-height: 100vh;
-    padding: 24px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    padding: 32px 20px;
+    background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #2c3e50;
     grid-template-areas:
         "sidebar header"
         "sidebar main";
+}
+
+/* Header con botón de menú */
+.problema-logico5-container .problem-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.problema-logico5-container .menu-button {
+    background: #16a085;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 4px rgba(22, 160, 133, 0.3);
+    flex-shrink: 0;
+}
+
+.problema-logico5-container .menu-button:hover {
+    background: #1abc9c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(22, 160, 133, 0.4);
 }
 
 /* Header */
@@ -28,6 +62,7 @@
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     text-align: center;
+    flex: 1;
 }
 
 .problema-logico5-container .vegas-header h2 {
