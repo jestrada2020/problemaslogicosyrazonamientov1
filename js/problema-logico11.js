@@ -177,8 +177,7 @@ function aplicarCambios11(cambios) {
 
 function actualizarDisplay11() {
     const paso = PROBLEMA_LOGICO_11.pasos[PROBLEMA_LOGICO_11.pasoActual];
-    document.getElementById('titulo-paso-11').textContent = `Paso ${PROBLEMA_LOGICO_11.pasoActual + 1}: ${paso.titulo}`;
-    document.getElementById('descripcion-paso-11').innerHTML = paso.descripcion;
+    document.getElementById('pl11-descripcion-paso').innerHTML = `<strong>Paso ${PROBLEMA_LOGICO_11.pasoActual + 1}: ${paso.titulo}</strong><br>${paso.descripcion}`;
     
     // Actualizar matrices
     actualizarMatrizHTML11('nombre-apellido', PROBLEMA_LOGICO_11.matrices.NombreApellido, PROBLEMA_LOGICO_11.nombres, PROBLEMA_LOGICO_11.apellidos);
@@ -196,7 +195,7 @@ function actualizarDisplay11() {
 }
 
 function actualizarMatrizHTML11(tipo, matriz, filas, columnas) {
-    let html = '<table class="matrix-table"><thead><tr><th></th>';
+    let html = '<table class="logic-grid"><thead><tr><th></th>';
     
     // Headers de columnas
     for (let col of columnas) {
@@ -209,7 +208,7 @@ function actualizarMatrizHTML11(tipo, matriz, filas, columnas) {
         html += `<tr><th>${fila}</th>`;
         for (let col of columnas) {
             const valor = matriz[fila][col];
-            const valorDisplay = valor === "•" ? "●" : valor;
+            const valorDisplay = valor === "•" ? "●" : valor === "X" ? "✕" : "";
             html += `<td data-valor="${valor}">${valorDisplay}</td>`;
         }
         html += '</tr>';
@@ -220,8 +219,8 @@ function actualizarMatrizHTML11(tipo, matriz, filas, columnas) {
 }
 
 function mostrarSolucionFinal11() {
-    let solucion = '<h3>¡Problema Resuelto!</h3>';
-    solucion += '<table class="solucion-table"><thead><tr><th>Nombre</th><th>Apellido</th><th>Marca</th><th>Año</th></tr></thead><tbody>';
+    let solucion = '<h3><i class="fas fa-trophy"></i> ¡Problema Resuelto!</h3>';
+    solucion += '<div class="solucion-grid">';
     
     const orden = ["Jaime", "Isidro", "Gustavo", "Lorenzo", "Marcos"];
     
@@ -252,18 +251,27 @@ function mostrarSolucionFinal11() {
             }
         }
         
-        solucion += `<tr><td>${nombre}</td><td>${apellido}</td><td>${marca}</td><td>${anio}</td></tr>`;
+        solucion += `<div class="solucion-item">
+            <strong>${nombre} ${apellido}:</strong><br>
+            ${marca} (${anio})
+        </div>`;
     }
     
-    solucion += '</tbody></table>';
-    document.getElementById('solucion-final-11').innerHTML = solucion;
+    solucion += '</div>';
+    
+    const solucionDiv = document.getElementById('solucion-final-11');
+    solucionDiv.innerHTML = solucion;
+    solucionDiv.style.display = 'block';
 }
 
 function reiniciar11() {
     PROBLEMA_LOGICO_11.pasoActual = 0;
     inicializarMatrices11();
     actualizarDisplay11();
-    document.getElementById('solucion-final-11').innerHTML = '<p>La solución aparecerá aquí una vez completados todos los pasos.</p>';
+    
+    const solucionDiv = document.getElementById('solucion-final-11');
+    solucionDiv.style.display = 'none';
+    solucionDiv.innerHTML = '';
 }
 
 function siguientePaso11() {
@@ -284,50 +292,54 @@ function resolverCompleto11() {
 }
 
 function mostrarMatriz11(tipo) {
-    document.querySelectorAll('.problema-logico11-container .tab-btn').forEach(btn => {
+    // Actualizar botones de pestañas (usando nueva clase)
+    document.querySelectorAll('.tab-button').forEach(btn => {
         btn.classList.remove('active');
     });
     
-    document.querySelectorAll('.problema-logico11-container .matriz-content').forEach(content => {
+    // Actualizar contenido de pestañas (usando nueva clase)
+    document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
     });
     
-    document.querySelector(`.problema-logico11-container .tab-btn[onclick="mostrarMatriz11('${tipo}')"]`).classList.add('active');
-    document.getElementById(`matriz-${tipo}-11`).classList.add('active');
+    // Activar pestaña seleccionada
+    const activeBtn = document.querySelector(`[data-tab="${tipo}"]`);
+    if (activeBtn) activeBtn.classList.add('active');
+    
+    const activeContent = document.getElementById(`matriz-${tipo}-11`);
+    if (activeContent) activeContent.classList.add('active');
 }
 
 function loadProblemaLogico11() {
     const toolContent = document.getElementById('tool-content');
     toolContent.innerHTML = `
-        <div class="problema-logico11-container">
-            <h1>El Club de Coches Antiguos</h1>
+        <div class="problema-logico-11">
+            <h1 class="main-title">El Club de Coches Antiguos - Problema Lógico 11</h1>
             
-            <div class="problema-layout">
-                <div class="problema-sidebar">
-                    <div class="control-panel">
-                        <h3><i class="fas fa-car"></i> Controles</h3>
-                        <div class="control-buttons">
-                            <button class="btn-control btn-reiniciar" onclick="reiniciar11()">
-                                <i class="fas fa-refresh"></i> Reiniciar
-                            </button>
-                            <button id="btn-siguiente-11" class="btn-control btn-siguiente" onclick="siguientePaso11()">
-                                <i class="fas fa-arrow-right"></i> Siguiente
-                            </button>
-                            <button id="btn-resolver-11" class="btn-control btn-resolver" onclick="resolverCompleto11()">
-                                <i class="fas fa-check-double"></i> Resolver Todo
-                            </button>
-                        </div>
+            <div class="layout-container">
+                <div class="sidebar-panel">
+                    <h3><i class="fas fa-car"></i> Controles</h3>
+                    <div class="control-buttons">
+                        <button class="btn-control btn-reiniciar" onclick="reiniciar11()">
+                            <i class="fas fa-refresh"></i> Reiniciar
+                        </button>
+                        <button id="btn-siguiente-11" class="btn-control btn-siguiente" onclick="siguientePaso11()">
+                            <i class="fas fa-arrow-right"></i> Siguiente
+                        </button>
+                        <button id="btn-resolver-11" class="btn-control btn-resolver" onclick="resolverCompleto11()">
+                            <i class="fas fa-check-double"></i> Resolver Todo
+                        </button>
                     </div>
                     
-                    <div class="enunciado-panel">
-                        <h3>Enunciado</h3>
-                        <p>Cinco miembros de un club de coches antiguos poseen una marca de coche distinta (Nike, Hydra, Kratos, Sibyl, Pegasus) y cada modelo corresponde a un año diferente (47, 49, 51, 53, 55). Objetivo: Determinar el nombre propio, apellido, marca de coche y año del modelo de cada miembro.</p>
+                    <div class="problema-info">
+                        <h4><i class="fas fa-info-circle"></i> Enunciado</h4>
+                        <p>Cinco miembros de un club de coches antiguos poseen una marca de coche distinta (Nike, Hydra, Kratos, Sibyl, Pegasus) y cada modelo corresponde a un año diferente (47, 49, 51, 53, 55). Determinar el nombre propio, apellido, marca de coche y año del modelo de cada miembro.</p>
                     </div>
                     
-                    <div class="pistas-panel">
-                        <h3>Pistas</h3>
+                    <div class="problema-info">
+                        <h4><i class="fas fa-lightbulb"></i> Pistas</h4>
                         <ul>
-                            <li><strong>P1:</strong> Los tres coches más antiguos (47, 49, 51) son propiedad de Gustavo, el señor Blasco y Jaime, aunque no forzosamente en este orden.</li>
+                            <li><strong>P1:</strong> Los tres coches más antiguos (47, 49, 51) son propiedad de Gustavo, el señor Blasco y Jaime.</li>
                             <li><strong>P2:</strong> El Nike es más antiguo que el coche de Marcos.</li>
                             <li><strong>P3:</strong> El coche del señor Casas es más antiguo que el Kratos.</li>
                             <li><strong>P4:</strong> El coche de Isidro es dos años más antiguo que el Pegasus.</li>
@@ -337,35 +349,67 @@ function loadProblemaLogico11() {
                     </div>
                 </div>
                 
-                <div class="problema-main">
-                    <div class="paso-info">
-                        <h2 id="titulo-paso-11"></h2>
-                        <div id="descripcion-paso-11" class="descripcion-paso"></div>
-                    </div>
-                    
-                    <div class="matrices-container">
-                        <div class="matriz-tab">
-                            <div class="tab-buttons">
-                                <button class="tab-btn active" onclick="mostrarMatriz11('nombre-apellido')">Nombre - Apellido</button>
-                                <button class="tab-btn" onclick="mostrarMatriz11('nombre-marca')">Nombre - Marca</button>
-                                <button class="tab-btn" onclick="mostrarMatriz11('nombre-anio')">Nombre - Año</button>
-                                <button class="tab-btn" onclick="mostrarMatriz11('marca-anio')">Marca - Año</button>
-                            </div>
-                            <div class="tab-content">
-                                <div id="matriz-nombre-apellido-11" class="matriz-content active"></div>
-                                <div id="matriz-nombre-marca-11" class="matriz-content"></div>
-                                <div id="matriz-nombre-anio-11" class="matriz-content"></div>
-                                <div id="matriz-marca-anio-11" class="matriz-content"></div>
-                            </div>
+                <div class="main-content">
+                    <div class="paso-descripcion">
+                        <div id="pl11-descripcion-paso">
+                            <strong>Estado Inicial:</strong><br>
+                            5 Nombres, 5 Apellidos, 5 Marcas, 5 Años. Haga clic en "Siguiente" para comenzar el análisis paso a paso.
                         </div>
                     </div>
                     
-                    <div id="solucion-final-11" class="solucion-final-container"></div>
+                    <div class="matrices-tabs">
+                        <div class="tab-buttons">
+                            <button class="tab-button active" data-tab="nombre-apellido">
+                                <i class="fas fa-users"></i> Nombre - Apellido
+                            </button>
+                            <button class="tab-button" data-tab="nombre-marca">
+                                <i class="fas fa-car"></i> Nombre - Marca
+                            </button>
+                            <button class="tab-button" data-tab="nombre-anio">
+                                <i class="fas fa-calendar"></i> Nombre - Año
+                            </button>
+                            <button class="tab-button" data-tab="marca-anio">
+                                <i class="fas fa-history"></i> Marca - Año
+                            </button>
+                        </div>
+                        
+                        <div class="matriz-container">
+                            <div id="matriz-nombre-apellido-11" class="tab-content active"></div>
+                            <div id="matriz-nombre-marca-11" class="tab-content"></div>
+                            <div id="matriz-nombre-anio-11" class="tab-content"></div>
+                            <div id="matriz-marca-anio-11" class="tab-content"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="solucion-final-11" class="solucion-final" style="display: none;"></div>
                 </div>
             </div>
         </div>
     `;
     
+    // Inicializar el problema
     inicializarMatrices11();
     actualizarDisplay11();
+    
+    // Configurar event listeners para las pestañas
+    setupTabListeners11();
+    
+    // Actualizar menú
+    document.querySelectorAll('#sidebar button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    const menuButton = document.querySelector('button[onclick="app.loadTool(\'problemaLogico11\')"]');
+    if (menuButton) {
+        menuButton.classList.add('active');
+    }
+}
+
+function setupTabListeners11() {
+    document.querySelectorAll('.tab-button').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const tab = e.target.dataset.tab || e.target.closest('.tab-button').dataset.tab;
+            if (tab) mostrarMatriz11(tab);
+        });
+    });
 }

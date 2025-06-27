@@ -1,190 +1,334 @@
 /* ======================================================================= */
 /* PROBLEMA LÓGICO 6 - LA EDAD DORADA */
-/* PALETA DORADA ÁMBAR Y CARAMELO */
+/* ESTILO MINIMALISTA Y MODERNO UNIFICADO */
 /* ======================================================================= */
 
 .problema-logico6-container {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 24px;
     min-height: 100vh;
-    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
-    padding: 32px 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #2c3e50;
+    padding: 20px;
+    background: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+    color: #1a1a1a;
+    grid-template-areas:
+        "sidebar header"
+        "sidebar main";
 }
 
-.problema-logico6-container h1 {
-    color: #fff;
-    text-align: center;
-    font-size: 2.7rem;
-    margin-bottom: 36px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-shadow: 0 4px 24px rgba(255, 152, 0, 0.3);
-}
-
-.problema-logico6-container .problema-header {
-    background: rgba(255,255,255,0.95);
-    border-radius: 16px;
+/* Header */
+.problema-logico6-container .edad-header {
+    grid-area: header;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
     padding: 24px;
-    margin-bottom: 24px;
-    box-shadow: 0 8px 32px rgba(255, 152, 0, 0.15);
-    border: 1px solid rgba(255, 152, 0, 0.2);
-    text-align: center;
+    text-align: left;
 }
 
-.problema-logico6-container .problema-header h2 {
-    color: #ff9800;
+.problema-logico6-container .edad-header h2 {
+    color: #1a1a1a;
     font-size: 2.2rem;
     margin-bottom: 16px;
-    font-weight: 700;
+    font-weight: 300;
+    letter-spacing: -0.5px;
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 12px;
 }
 
-.problema-logico6-container .problema-descripcion {
-    color: #2c3e50;
-    font-size: 1.1rem;
+.problema-logico6-container .edad-descripcion {
+    color: #4b5563;
+    font-size: 14px;
     line-height: 1.6;
-    margin: 0;
+    margin: 0 0 20px 0;
 }
 
-.problema-logico6-container .pistas-container {
-    background: linear-gradient(135deg, #f57c00 0%, #e65100 100%);
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 24px;
-    box-shadow: 0 8px 32px rgba(255, 152, 0, 0.15);
-    border: 1px solid rgba(255, 152, 0, 0.2);
+.problema-logico6-container .participantes-edad-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
 }
 
-.problema-logico6-container .pistas-container h3 {
-    color: #ffffff;
+.problema-logico6-container .edad-info-grupo {
+    background: #f9fafb;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border-left: 2px solid #d1d5db;
+    font-size: 14px;
+}
+
+.problema-logico6-container .edad-info-grupo strong {
+    color: #1f2937;
+}
+
+/* Sidebar */
+.problema-logico6-container .edad-pistas-container {
+    grid-area: sidebar;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+}
+
+.problema-logico6-container .edad-pistas-container h3 {
+    color: #1f2937;
     margin-bottom: 16px;
-    font-size: 1.4rem;
+    font-size: 1.1rem;
+    font-weight: 500;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
-.problema-logico6-container .pistas-grid {
-    display: grid;
-    gap: 12px;
+.problema-logico6-container .edad-pistas-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.problema-logico6-container .pista-item {
-    background: linear-gradient(135deg, #f8f9ff 0%, #e8ebff 100%);
-    border-radius: 10px;
-    padding: 16px;
-    border-left: 4px solid #ff9800;
-    transition: all 0.3s ease;
-    color: #2c3e50;
+.problema-logico6-container .edad-pista-item {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 8px 12px;
+    border-left: 2px solid #d1d5db;
+    transition: all 0.2s ease;
+    color: #4b5563;
     line-height: 1.5;
+    font-size: 12px;
 }
 
-.problema-logico6-container .pista-item.pista-usada {
-    background: linear-gradient(135deg, #d5f4e6 0%, #c3f0d3 100%);
-    border-left-color: #27ae60;
-    opacity: 0.8;
+.problema-logico6-container .edad-pista-item.pista-usada {
+    background: #dcfce7;
+    border-left-color: #22c55e;
+    opacity: 0.9;
 }
 
-.problema-logico6-container .matrices-container {
-    background: rgba(255,255,255,0.95);
-    border-radius: 16px;
+/* Main Content */
+.problema-logico6-container .edad-main-content {
+    grid-area: main;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
     padding: 24px;
-    margin-bottom: 24px;
-    box-shadow: 0 8px 32px rgba(255, 152, 0, 0.15);
-    border: 1px solid rgba(255, 152, 0, 0.2);
 }
 
-.problema-logico6-container .edades-container {
-    background: rgba(255,255,255,0.95);
-    border-radius: 16px;
-    padding: 24px;
+.problema-logico6-container .edad-matriz-section {
     margin-bottom: 24px;
-    box-shadow: 0 8px 32px rgba(255, 152, 0, 0.15);
-    border: 1px solid rgba(255, 152, 0, 0.2);
 }
 
-.problema-logico6-container .edades-container h3 {
-    color: #ff9800;
-    margin-bottom: 16px;
-    font-size: 1.4rem;
+.problema-logico6-container .edad-matriz-section h3 {
+    color: #1f2937;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    font-weight: 500;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
 }
 
-.problema-logico6-container .edades-grid {
+.problema-logico6-container .edad-matriz-container {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.problema-logico6-container .edad-edades-section {
+    margin-bottom: 24px;
+}
+
+.problema-logico6-container .edad-edades-section h3 {
+    color: #1f2937;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.problema-logico6-container .edad-edades-display {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 16px;
 }
 
-.problema-logico6-container .edad-item {
-    background: linear-gradient(135deg, #f8f9ff 0%, #e8ebff 100%);
-    border-radius: 10px;
+.problema-logico6-container .edad-nombres-col,
+.problema-logico6-container .edad-apellidos-col {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
     padding: 16px;
-    border: 2px solid rgba(255, 152, 0, 0.2);
-    transition: all 0.3s ease;
 }
 
-.problema-logico6-container .edad-item.asignada {
-    border-color: #27ae60;
-    background: linear-gradient(135deg, #d5f4e6 0%, #c3f0d3 100%);
+.problema-logico6-container .edad-nombres-col h4,
+.problema-logico6-container .edad-apellidos-col h4 {
+    color: #1f2937;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
-.problema-logico6-container .controles-container {
-    background: rgba(255,255,255,0.95);
-    border-radius: 16px;
-    padding: 24px;
-    text-align: center;
-    box-shadow: 0 8px 32px rgba(255, 152, 0, 0.15);
-    border: 1px solid rgba(255, 152, 0, 0.2);
-}
-
-.problema-logico6-container .controles-buttons {
+.problema-logico6-container .edad-lista {
     display: flex;
-    gap: 12px;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.problema-logico6-container .edad-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 12px;
+}
+
+.problema-logico6-container .edad-nombre {
+    color: #374151;
+    font-weight: 500;
+}
+
+.problema-logico6-container .edad-valor {
+    color: #059669;
+    font-weight: 600;
+}
+
+/* Controls */
+.problema-logico6-container .edad-controles {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 8px;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.problema-logico6-container .btn-control {
-    padding: 12px 24px;
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
+.problema-logico6-container .edad-btn {
+    padding: 8px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-weight: 400;
     cursor: pointer;
-    transition: all 0.3s ease;
-    color: white;
-    font-size: 15px;
+    transition: all 0.2s ease;
+    color: #374151;
+    font-size: 14px;
+    background: #ffffff;
     display: flex;
     align-items: center;
+    gap: 6px;
+    justify-content: center;
+}
+
+.problema-logico6-container .edad-btn:hover:not(:disabled) {
+    background: #f9fafb;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.problema-logico6-container .edad-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.problema-logico6-container .edad-btn.reiniciar {
+    border-color: #dc2626;
+    color: #dc2626;
+}
+
+/* Step Info */
+.problema-logico6-container .edad-paso-info {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    border-left: 3px solid #6b7280;
+}
+
+.problema-logico6-container .edad-paso-info h4 {
+    color: #1f2937;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.problema-logico6-container .edad-paso-info p {
+    color: #4b5563;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Solution */
+.problema-logico6-container .edad-solucion-container {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    padding: 16px;
+    color: #166534;
+    margin-top: 20px;
+}
+
+.problema-logico6-container .edad-solucion-container h3 {
+    color: #166534;
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 8px;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-.problema-logico6-container .btn-reiniciar {
-    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+.problema-logico6-container .edad-solucion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
 }
 
-.problema-logico6-container .btn-siguiente {
-    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+.problema-logico6-container .edad-solucion-item {
+    background: #dcfce7;
+    border: 1px solid #bbf7d0;
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
 }
 
-.problema-logico6-container .btn-resolver {
-    background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+.problema-logico6-container .edad-solucion-item h4 {
+    color: #166534;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
-.problema-logico6-container .btn-control:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-    filter: brightness(1.1);
+.problema-logico6-container .edad-solucion-item p {
+    color: #166534;
+    margin: 4px 0;
+    font-size: 14px;
 }
 
-/* Tablas/Matrices */
+.problema-logico6-container .edad-posicion {
+    font-style: italic;
+    font-size: 12px !important;
+    opacity: 0.8;
+}
+
+/* Mantener estilos de tablas sin cambios */
 .problema-logico6-container table {
     width: 100%;
     border-collapse: collapse;
@@ -237,33 +381,183 @@
     line-height: 1.6;
 }
 
+/* Tabla de Solución Final - Estilo unificado con otros problemas lógicos */
+.problema-logico6-container .edad-tabla-solucion {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 32px rgba(79, 70, 229, 0.15);
+    border: 1px solid rgba(79, 70, 229, 0.2);
+}
+
+.problema-logico6-container .edad-tabla-solucion h3 {
+    color: #4f46e5;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    text-align: center;
+    justify-content: center;
+}
+
+.problema-logico6-container .tabla-solucion-final {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.15);
+    margin: 16px 0;
+    background: white;
+}
+
+.problema-logico6-container .tabla-solucion-final th,
+.problema-logico6-container .tabla-solucion-final td {
+    border: 1px solid #e2e8f0;
+    padding: 16px 12px;
+    text-align: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.problema-logico6-container .tabla-solucion-final th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.problema-logico6-container .tabla-solucion-final td {
+    background: #f8f9ff;
+    color: #475569;
+    font-weight: 500;
+}
+
+.problema-logico6-container .tabla-solucion-final td:hover {
+    background: #e8ebff;
+    transform: scale(1.02);
+}
+
+.problema-logico6-container .tabla-solucion-final tbody tr:nth-child(even) td {
+    background: #f1f5f9;
+}
+
+.problema-logico6-container .tabla-solucion-final tbody tr:nth-child(even) td:hover {
+    background: #e8ebff;
+}
+
+.problema-logico6-container .nombre-cell {
+    font-weight: 600;
+    color: #4f46e5;
+}
+
+.problema-logico6-container .apellido-cell {
+    font-weight: 600;
+    color: #7c3aed;
+}
+
+.problema-logico6-container .edad-cell {
+    font-weight: 700;
+    color: #059669;
+    font-size: 1.1rem;
+}
+
+.problema-logico6-container .observacion-cell {
+    font-style: italic;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
 /* Responsive */
+@media (max-width: 1024px) {
+    .problema-logico6-container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "sidebar"
+            "main";
+        gap: 20px;
+    }
+    
+    .problema-logico6-container .edad-pistas-container {
+        position: static;
+    }
+}
+
 @media (max-width: 768px) {
     .problema-logico6-container {
-        padding: 20px 16px;
+        padding: 16px;
+        gap: 16px;
     }
     
-    .problema-logico6-container h1 {
-        font-size: 2.2rem;
-        margin-bottom: 25px;
+    .problema-logico6-container .edad-header {
+        padding: 20px;
     }
     
-    .problema-logico6-container .controles-buttons {
+    .problema-logico6-container .edad-header h2 {
+        font-size: 1.8rem;
+        text-align: center;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .problema-logico6-container .participantes-edad-info {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .problema-logico6-container .edad-main-content {
+        padding: 20px;
+    }
+    
+    .problema-logico6-container .edad-edades-display {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .problema-logico6-container .edad-controles {
         flex-direction: column;
         align-items: stretch;
     }
     
-    .problema-logico6-container .btn-control {
+    .problema-logico6-container .edad-btn {
         justify-content: center;
     }
     
-    .problema-logico6-container .edades-grid {
+    .problema-logico6-container .edad-solucion-grid {
         grid-template-columns: 1fr;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .problema-logico6-container {
+        padding: 12px;
     }
     
-    .problema-logico6-container table th,
-    .problema-logico6-container table td {
-        padding: 8px 6px;
-        font-size: 0.9rem;
+    .problema-logico6-container .edad-header {
+        padding: 16px;
+    }
+    
+    .problema-logico6-container .edad-header h2 {
+        font-size: 1.6rem;
+    }
+    
+    .problema-logico6-container .edad-pistas-container,
+    .problema-logico6-container .edad-main-content {
+        padding: 16px;
+    }
+    
+    .problema-logico6-container .edad-pista-item {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+    
+    .problema-logico6-container .edad-item {
+        font-size: 11px;
+        padding: 4px 6px;
     }
 }

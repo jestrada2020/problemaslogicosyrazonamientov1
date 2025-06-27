@@ -1,353 +1,365 @@
 /* ======================================================================= */
-/* PROBLEMA LÓGICO 11 - PALETA ROSA MAGENTA Y FRESA */
+/* PROBLEMA LÓGICO 11 - ESTILO MINIMALISTA Y MODERNO (IGUAL AL PROBLEMA 3) */
 /* ======================================================================= */
 
-.problema-logico11-container {
+.problema-logico-11 {
     min-height: 100vh;
-    background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
-    padding: 32px 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #2c3e50;
-}
-
-.problema-logico11-container h1 {
-    color: #fff;
-    text-align: center;
-    font-size: 2.7rem;
-    margin-bottom: 36px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-shadow: 0 4px 24px rgba(233, 30, 99, 0.3);
-}
-
-.problema-logico11-container .problema-layout {
-    display: flex;
-    gap: 32px;
-    max-width: 1400px;
-    margin: 0 auto;
-    align-items: flex-start;
-}
-
-.problema-logico11-container .problema-sidebar {
-    width: 340px;
-    background: rgba(255,255,255,0.98);
-    border-radius: 18px;
-    padding: 28px 22px 22px 22px;
-    box-shadow: 0 8px 32px rgba(233, 30, 99, 0.15);
-    position: sticky;
-    top: 32px;
-    z-index: 2;
-    border: 1.5px solid rgba(233, 30, 99, 0.2);
-    transition: box-shadow 0.2s;
-}
-
-.problema-logico11-container .problema-sidebar:hover {
-    box-shadow: 0 12px 40px rgba(233, 30, 99, 0.25);
-}
-
-.problema-logico11-container .problema-main {
-    flex: 1;
-    background: rgba(255,255,255,0.98);
-    border-radius: 18px;
-    padding: 32px 28px 28px 28px;
-    box-shadow: 0 8px 32px rgba(233, 30, 99, 0.15);
-    border: 1.5px solid #e3e6f0;
-    min-width: 0;
-}
-
-.problema-logico11-container .control-panel {
-    background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
-    border-radius: 14px;
-    padding: 18px 16px 14px 16px;
-    margin-bottom: 24px;
-    box-shadow: 0 4px 15px rgba(44,90,160,0.08);
-}
-
-.problema-logico11-container .control-buttons {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 18px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.problema-logico11-container .btn-control {
-    padding: 12px 22px;
-    border: none;
-    border-radius: 9px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(.4,0,.2,1);
-    color: white;
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 2px 8px rgba(44,90,160,0.08);
-    outline: none;
-    letter-spacing: 0.5px;
-}
-
-.problema-logico11-container .btn-reiniciar {
-    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-}
-
-.problema-logico11-container .btn-siguiente {
-    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-}
-
-.problema-logico11-container .btn-resolver {
-    background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
-}
-
-.problema-logico11-container .btn-control:hover:not(:disabled) {
-    transform: translateY(-2px) scale(1.04);
-    box-shadow: 0 6px 20px rgba(44,90,160,0.18);
-    filter: brightness(1.08);
-}
-
-.problema-logico11-container .btn-control:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-}
-
-.problema-logico11-container .paso-info {
-    background: rgba(255,255,255,0.92);
-    border-radius: 12px;
-    padding: 16px;
-    color: #2c3e50;
-    line-height: 1.6;
-    border-left: 4px solid #87ceeb;
-}
-
-.problema-logico11-container .paso-info h2 {
-    color: #3498db;
-    margin-bottom: 12px;
-    font-size: 1.3rem;
-}
-
-.problema-logico11-container .descripcion-paso {
-    background: rgba(255,255,255,0.85);
-    border-radius: 10px;
-    padding: 14px;
-    margin-top: 12px;
-    color: #2c3e50;
-}
-
-.problema-logico11-container .enunciado-panel,
-.problema-logico11-container .pistas-panel {
-    background: rgba(255,255,255,0.98);
-    border-radius: 14px;
+    background: #ffffff;
     padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 20px rgba(233, 30, 99, 0.08);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+    color: #1a1a1a;
 }
 
-.problema-logico11-container .enunciado-panel h3,
-.problema-logico11-container .pistas-panel h3 {
-    color: #e91e63;
-    margin-bottom: 14px;
-    font-size: 1.2rem;
-    font-weight: 600;
+.problema-logico-11 .main-title {
+    color: #1a1a1a;
+    text-align: left;
+    font-size: 2.2rem;
+    margin-bottom: 24px;
+    font-weight: 300;
+    letter-spacing: -0.5px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.problema-logico-11 .layout-container {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.problema-logico-11 .sidebar-panel {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    position: sticky;
+    top: 20px;
+}
+
+.problema-logico-11 .sidebar-panel h3 {
+    color: #1f2937;
+    margin-bottom: 16px;
+    font-size: 1.1rem;
+    font-weight: 500;
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.problema-logico11-container .enunciado-panel p,
-.problema-logico11-container .pistas-panel li {
-    color: #2c3e50;
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-
-.problema-logico11-container .pistas-panel ul {
-    list-style: none;
-    padding: 0;
-}
-
-.problema-logico11-container .pistas-panel li {
-    background: linear-gradient(135deg, #f8f9ff 0%, #e8ebff 100%);
-    border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 8px;
-    border-left: 3px solid #e91e63;
-}
-
-.problema-logico11-container .matriz-tabs {
+.problema-logico-11 .control-buttons {
     display: flex;
-    gap: 6px;
+    flex-direction: column;
+    gap: 8px;
     margin-bottom: 20px;
-    flex-wrap: wrap;
-    background: rgba(255,255,255,0.1);
-    padding: 8px;
-    border-radius: 12px;
 }
 
-.problema-logico11-container .tab-btn {
-    padding: 12px 18px;
-    border: none;
-    border-radius: 8px;
-    background: rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.8);
-    font-weight: 600;
+.problema-logico-11 .btn-control {
+    padding: 8px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-weight: 400;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
+    color: #374151;
     font-size: 14px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: flex-start;
+}
+
+.problema-logico-11 .btn-reiniciar {
+    border-color: #dc2626;
+    color: #dc2626;
+}
+
+.problema-logico-11 .btn-siguiente {
+    border-color: #2563eb;
+    color: #2563eb;
+}
+
+.problema-logico-11 .btn-resolver {
+    border-color: #059669;
+    color: #059669;
+}
+
+.problema-logico-11 .btn-control:hover {
+    background: #f9fafb;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.problema-logico-11 .problema-info {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border-left: 3px solid #6b7280;
+}
+
+.problema-logico-11 .problema-info h4 {
+    color: #1f2937;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    font-weight: 500;
     display: flex;
     align-items: center;
     gap: 6px;
 }
 
-.problema-logico11-container .tab-btn.active {
-    background: rgba(255,255,255,0.95);
-    color: #e91e63;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+.problema-logico-11 .problema-info p,
+.problema-logico-11 .problema-info li {
+    color: #4b5563;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    font-size: 14px;
 }
 
-.problema-logico11-container .tab-btn:hover:not(.active) {
-    background: rgba(255,255,255,0.2);
-    color: white;
+.problema-logico-11 .problema-info ul {
+    padding-left: 0;
+    list-style: none;
 }
 
-.problema-logico11-container .matriz-content {
-    background: rgba(255,255,255,0.98);
-    border-radius: 14px;
+.problema-logico-11 .problema-info li {
+    background: #f9fafb;
+    margin: 4px 0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border-left: 2px solid #d1d5db;
+}
+
+.problema-logico-11 .main-content {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
     padding: 24px;
-    box-shadow: 0 4px 20px rgba(233, 30, 99, 0.08);
 }
 
-.problema-logico11-container .matriz-content:not(.active) {
+.problema-logico-11 .paso-descripcion {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    border-left: 3px solid #6b7280;
+}
+
+.problema-logico-11 #pl11-descripcion-paso {
+    color: #4b5563;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.problema-logico-11 #pl11-descripcion-paso strong {
+    color: #1f2937;
+}
+
+.problema-logico-11 .matrices-tabs {
+    margin-bottom: 20px;
+}
+
+.problema-logico-11 .tab-buttons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.problema-logico-11 .tab-button {
+    padding: 8px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #374151;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.problema-logico-11 .tab-button.active {
+    background: #f9fafb;
+    border-color: #2563eb;
+    color: #2563eb;
+    font-weight: 500;
+}
+
+.problema-logico-11 .tab-button:hover {
+    background: #f9fafb;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.problema-logico-11 .matriz-container {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.problema-logico-11 .tab-content {
     display: none;
 }
 
-.problema-logico11-container .matriz-content.active {
+.problema-logico-11 .tab-content.active {
     display: block;
 }
 
-.problema-logico11-container .matriz-logica {
-    width: 100%;
-    border-collapse: collapse;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(233, 30, 99, 0.08);
-    margin: 16px 0;
-}
-
-.problema-logico11-container .matriz-logica th {
-    background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
-    color: white;
-    padding: 16px 12px;
-    font-weight: 600;
-    font-size: 14px;
-    text-align: center;
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-.problema-logico11-container .matriz-logica td {
-    background: #f8f9ff;
-    padding: 14px 12px;
-    text-align: center;
-    font-weight: 500;
-    font-size: 16px;
-    border: 1px solid #e3e6f0;
-    transition: all 0.2s;
-    cursor: pointer;
-    min-width: 45px;
-    min-height: 45px;
-}
-
-.problema-logico11-container .matriz-logica td:hover {
-    background: #e8ebff;
-    transform: scale(1.05);
-}
-
-.problema-logico11-container .matriz-logica td.si {
-    background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
-    color: white;
-    font-weight: 700;
-}
-
-.problema-logico11-container .matriz-logica td.no {
-    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-    color: white;
-    font-weight: 700;
-}
-
-.problema-logico11-container .solucion-final {
-    background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
-    border-radius: 16px;
-    padding: 28px;
-    text-align: center;
-    color: white;
-    box-shadow: 0 8px 32px rgba(39, 174, 96, 0.2);
-    margin-top: 24px;
-}
-
-.problema-logico11-container .solucion-final h3 {
-    color: white;
-    margin-bottom: 20px;
-    font-size: 1.6rem;
-}
-
-.problema-logico11-container .solucion-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
+.problema-logico-11 .solucion-final {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    padding: 16px;
+    color: #166534;
     margin-top: 20px;
 }
 
-.problema-logico11-container .solucion-item {
-    background: rgba(255,255,255,0.1);
-    border-radius: 10px;
-    padding: 16px;
+/* Estilos para las marcas en las matrices */
+.problema-logico-11 .marca-x {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+.problema-logico-11 .marca-check {
+    color: #059669;
+    font-weight: 600;
+}
+
+/* Estilos específicos para las tablas lógicas del problema 11 */
+.problema-logico-11 .logic-grid {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.1);
+    margin: 16px 0;
+}
+
+.problema-logico-11 .logic-grid th,
+.problema-logico-11 .logic-grid td {
+    border: 2px solid #e3e6f0;
+    padding: 12px;
     text-align: center;
+    font-weight: 500;
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-    .problema-logico11-container .problema-layout {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .problema-logico11-container .problema-sidebar {
-        width: 100%;
-        position: static;
-    }
+.problema-logico-11 .logic-grid th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 12px;
 }
 
+.problema-logico-11 .logic-grid td {
+    background: #f8f9ff;
+    min-width: 32px;
+    height: 32px;
+    transition: background-color 0.3s ease;
+}
+
+.problema-logico-11 .logic-grid td:hover {
+    background: #e8ebff;
+}
+
+.problema-logico-11 .logic-grid td[data-valor="•"] {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    color: white;
+    font-weight: 700;
+}
+
+.problema-logico-11 .logic-grid td[data-valor="X"] {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    color: white;
+    font-weight: 700;
+}
+
+.problema-logico-11 .solucion-final h3 {
+    color: #166534;
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.problema-logico-11 .solucion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.problema-logico-11 .solucion-item {
+    background: #dcfce7;
+    border: 1px solid #bbf7d0;
+    border-radius: 6px;
+    padding: 8px 12px;
+    text-align: center;
+    font-size: 14px;
+    color: #166534;
+    font-weight: 500;
+}
+
+/* Responsive design */
 @media (max-width: 768px) {
-    .problema-logico11-container {
-        padding: 20px 16px;
+    .problema-logico-11 .layout-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
     }
     
-    .problema-logico11-container h1 {
-        font-size: 2.2rem;
-        margin-bottom: 25px;
+    .problema-logico-11 .sidebar-panel {
+        position: static;
+        order: -1;
     }
     
-    .problema-logico11-container .problema-sidebar,
-    .problema-logico11-container .problema-main {
-        padding: 20px 16px;
+    .problema-logico-11 .main-title {
+        font-size: 1.8rem;
+        text-align: center;
     }
     
-    .problema-logico11-container .matriz-tabs {
+    .problema-logico-11 .tab-buttons {
         flex-direction: column;
+        gap: 6px;
     }
     
-    .problema-logico11-container .tab-btn {
+    .problema-logico-11 .tab-button {
         justify-content: center;
     }
     
-    .problema-logico11-container .matriz-logica th,
-    .problema-logico11-container .matriz-logica td {
+    .problema-logico-11 .logic-grid th,
+    .problema-logico-11 .logic-grid td {
         padding: 10px 8px;
-        font-size: 0.9rem;
+        font-size: 14px;
     }
     
-    .problema-logico11-container .solucion-grid {
+    .problema-logico-11 .solucion-grid {
         grid-template-columns: 1fr;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .problema-logico-11 .main-title {
+        font-size: 1.6rem;
+    }
+    
+    .problema-logico-11 .main-content,
+    .problema-logico-11 .sidebar-panel {
+        padding: 16px;
+    }
+    
+    .problema-logico-11 .logic-grid th,
+    .problema-logico-11 .logic-grid td {
+        padding: 8px 6px;
+        font-size: 12px;
+        min-width: 35px;
+        min-height: 35px;
     }
 }

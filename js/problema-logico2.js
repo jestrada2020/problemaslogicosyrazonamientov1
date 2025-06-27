@@ -20,25 +20,25 @@ const problemaLogico2 = {
     // Definición de pasos de solución
     pasosSolucion: [
         {
-            descripcion: "<b>Estado Inicial:</b> Cuadrículas vacías. El problema indica que 'Mora' es uno de los apellidos.",
+            descripcion: "Estado inicial: cuadrículas vacías.",
             cambios: []
         },
         {
-            descripcion: "<b>Pista 1:</b> Jorge, que no se apellida López, no vende palomitas de maíz.<br>- Jorge ≠ López (Nombre vs Apellido)<br>- Jorge ≠ Palomitas (Nombre vs Mercancía)",
+            descripcion: "<b>Pista 1:</b> Jorge ≠ López, Jorge ≠ Palomitas",
             cambios: [
                 {matriz: "NvsA", fila: "Jorge", col: "López", valor: "X"},
                 {matriz: "NvsM", fila: "Jorge", col: "Palomitas", valor: "X"}
             ]
         },
         {
-            descripcion: "<b>Pista 2:</b> El que se apellida Díaz no vende ni gaseosa ni caramelos.<br>- Díaz ≠ Gaseosa (Apellido vs Mercancía)<br>- Díaz ≠ Caramelos (Apellido vs Mercancía)",
+            descripcion: "<b>Pista 2:</b> Díaz ≠ Gaseosa, Díaz ≠ Caramelos",
             cambios: [
                 {matriz: "AvsM", fila: "Díaz", col: "Gaseosa", valor: "X"},
                 {matriz: "AvsM", fila: "Díaz", col: "Caramelos", valor: "X"}
             ]
         },
         {
-            descripcion: "<b>Pista 3:</b> Los cinco chicos son: Noel, Jorge, el que se apellida Soto, el que se apellida Cobos y el que vende helados.<br>Esto implica que Noel y Jorge no son Soto ni Cobos, y no venden helados. Soto y Cobos no venden helados.<br>- Noel ≠ Soto; Noel ≠ Cobos; Noel ≠ Helados<br>- Jorge ≠ Soto; Jorge ≠ Cobos; Jorge ≠ Helados<br>- Soto ≠ Helados; Cobos ≠ Helados",
+            descripcion: "<b>Pista 3:</b> Noel y Jorge no son Soto/Cobos, no venden helados. Soto/Cobos no venden helados",
             cambios: [
                 {matriz: "NvsA", fila: "Noel", col: "Soto", valor: "X"},
                 {matriz: "NvsA", fila: "Noel", col: "Cobos", valor: "X"},
@@ -51,7 +51,7 @@ const problemaLogico2 = {
             ]
         },
         {
-            descripcion: "<b>Pista 4:</b> El apellido de Andrés no es ni López ni Cobos. Ni Andrés ni el que se apellida Cobos venden caramelos.<br>- Andrés ≠ López; Andrés ≠ Cobos (Nombre vs Apellido)<br>- Andrés ≠ Caramelos (Nombre vs Mercancía)<br>- Cobos ≠ Caramelos (Apellido vs Mercancía)",
+            descripcion: "<b>Pista 4:</b> Andrés ≠ López/Cobos, Andrés ≠ Caramelos, Cobos ≠ Caramelos",
             cambios: [
                 {matriz: "NvsA", fila: "Andrés", col: "López", valor: "X"},
                 {matriz: "NvsA", fila: "Andrés", col: "Cobos", valor: "X"},
@@ -60,7 +60,7 @@ const problemaLogico2 = {
             ]
         },
         {
-            descripcion: "<b>Pista 5:</b> Ni el vendedor de cacahuetes ni el vendedor de helados se llaman Paco o se apellidan Díaz.<br>- Paco ≠ Cacahuetes; Paco ≠ Helados (Nombre vs Mercancía)<br>- Díaz ≠ Cacahuetes; Díaz ≠ Helados (Apellido vs Mercancía)",
+            descripcion: "<b>Pista 5:</b> Paco ≠ Cacahuetes/Helados, Díaz ≠ Cacahuetes/Helados",
             cambios: [
                 {matriz: "NvsM", fila: "Paco", col: "Cacahuetes", valor: "X"},
                 {matriz: "NvsM", fila: "Paco", col: "Helados", valor: "X"},
@@ -69,75 +69,75 @@ const problemaLogico2 = {
             ]
         },
         {
-            descripcion: "<b>Deducción 1:</b> Análisis de restricciones nos lleva a determinar que <b>Díaz VENDE Palomitas</b>.<br>Díaz no vende Gaseosa, Caramelos, Cacahuetes, Helados (Pistas 2 y 5). Solo queda Palomitas.",
+            descripcion: "<b>Deducción:</b> Solo Díaz puede vender Palomitas. <strong>Díaz = Palomitas</strong>",
             cambios: [
                 {matriz: "AvsM", fila: "Díaz", col: "Palomitas", valor: "•"}
             ]
         },
         {
-            descripcion: "<b>Deducción 2:</b> ¿Quién es Díaz?<br>Jorge no vende Palomitas (Pista 1), pero Díaz sí vende Palomitas. Analizando las restricciones: <b>Paco ES Díaz</b>.",
+            descripcion: "<b>Deducción:</b> Por eliminación, <strong>Paco = Díaz</strong>",
             cambios: [
                 {matriz: "NvsA", fila: "Paco", col: "Díaz", valor: "•"}
             ]
         },
         {
-            descripcion: "<b>Propagación:</b> Como Paco es Díaz y Díaz vende Palomitas, entonces <b>Paco VENDE Palomitas</b>.",
+            descripcion: "<b>Propagación:</b> <strong>Paco = Palomitas</strong>",
             cambios: [
                 {matriz: "NvsM", fila: "Paco", col: "Palomitas", valor: "•"}
             ]
         },
         {
-            descripcion: "<b>Deducción 3:</b> ¿Quién es Cobos?<br>Paco es Díaz, así que no es Cobos. Andrés, Noel y Jorge no son Cobos (Pistas 3 y 4). Por lo tanto, <b>Luis ES Cobos</b>.",
+            descripcion: "<b>Deducción:</b> Por eliminación, <strong>Luis = Cobos</strong>",
             cambios: [
                 {matriz: "NvsA", fila: "Luis", col: "Cobos", valor: "•"}
             ]
         },
         {
-            descripcion: "<b>Deducción 4:</b> ¿Quién vende Helados?<br>Noel, Jorge, Paco, Luis no venden Helados (por las pistas). Por lo tanto, <b>Andrés VENDE Helados</b>.",
+            descripcion: "<b>Deducción:</b> Solo Andrés puede vender Helados. <strong>Andrés = Helados</strong>",
             cambios: [
                 {matriz: "NvsM", fila: "Andrés", col: "Helados", valor: "•"}
             ]
         },
         {
-            descripcion: "<b>Deducción 5:</b> ¿Apellido de Andrés?<br>Andrés no es López, Cobos ni Díaz. Andrés vende Helados y Soto no vende Helados. Por lo tanto, <b>Andrés ES Mora</b>.",
+            descripcion: "<b>Deducción:</b> Por eliminación, <strong>Andrés = Mora</strong>",
             cambios: [
                 {matriz: "NvsA", fila: "Andrés", col: "Mora", valor: "•"}
             ]
         },
         {
-            descripcion: "<b>Propagación:</b> <b>Mora VENDE Helados</b>.",
+            descripcion: "<b>Propagación:</b> <strong>Mora = Helados</strong>",
             cambios: [
                 {matriz: "AvsM", fila: "Mora", col: "Helados", valor: "•"}
             ]
         },
         {
-            descripcion: "<b>Deducción 6:</b> ¿Quién es Soto?<br>Por eliminación de candidatos: <b>Noel ES Soto</b>.",
+            descripcion: "<b>Deducción:</b> Por eliminación, <strong>Noel = Soto</strong>",
             cambios: [
                 {matriz: "NvsA", fila: "Noel", col: "Soto", valor: "•"}
             ]
         },
         {
-            descripcion: "<b>Deducción 7:</b> ¿Quién es López?<br>Por eliminación: <b>Jorge ES López</b>.",
+            descripcion: "<b>Deducción:</b> Por eliminación, <strong>Jorge = López</strong>",
             cambios: [
                 {matriz: "NvsA", fila: "Jorge", col: "López", valor: "•"}
             ]
         },
         {
-            descripcion: "<b>Deducción 8:</b> ¿Quién vende Caramelos?<br>Analizando las restricciones restantes: <b>Jorge (López) VENDE Caramelos</b>.",
+            descripcion: "<b>Deducción:</b> <strong>Jorge = Caramelos</strong>",
             cambios: [
                 {matriz: "NvsM", fila: "Jorge", col: "Caramelos", valor: "•"},
                 {matriz: "AvsM", fila: "López", col: "Caramelos", valor: "•"}
             ]
         },
         {
-            descripcion: "<b>Deducción 9:</b> ¿Quién vende Cacahuetes?<br>Por las restricciones: <b>Noel (Soto) VENDE Cacahuetes</b>.",
+            descripcion: "<b>Deducción:</b> <strong>Noel = Cacahuetes</strong>",
             cambios: [
                 {matriz: "NvsM", fila: "Noel", col: "Cacahuetes", valor: "•"},
                 {matriz: "AvsM", fila: "Soto", col: "Cacahuetes", valor: "•"}
             ]
         },
         {
-            descripcion: "<b>Deducción 10:</b> ¿Quién vende Gaseosa?<br>Por eliminación: <b>Luis (Cobos) VENDE Gaseosa</b>.<br><b>¡Problema Resuelto!</b>",
+            descripcion: "<b>Final:</b> <strong>Luis = Gaseosa</strong> - Problema resuelto",
             cambios: [
                 {matriz: "NvsM", fila: "Luis", col: "Gaseosa", valor: "•"},
                 {matriz: "AvsM", fila: "Cobos", col: "Gaseosa", valor: "•"}

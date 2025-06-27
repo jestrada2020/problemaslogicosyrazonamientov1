@@ -83,10 +83,10 @@ class ProblemaLogico14 {
         if (btnSiguiente) btnSiguiente.addEventListener('click', () => this.siguientePaso());
         if (btnResolver) btnResolver.addEventListener('click', () => this.resolverCompleto());
         
-        // Botones de pestañas de matrices
-        container.querySelectorAll('.tab-btn').forEach(btn => {
+        // Botones de pestañas de matrices (actualizados para la nueva clase)
+        container.querySelectorAll('.tab-button').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const tab = e.target.dataset.tab;
+                const tab = e.target.dataset.tab || e.target.closest('.tab-button').dataset.tab;
                 if (tab) this.showMatrixTab(tab);
             });
         });
@@ -195,21 +195,21 @@ class ProblemaLogico14 {
         const container = document.getElementById('problema-logico-14');
         if (!container) return;
         
-        // Actualizar botones
-        container.querySelectorAll('.tab-btn').forEach(btn => {
+        // Actualizar botones (usando nueva clase)
+        container.querySelectorAll('.tab-button').forEach(btn => {
             btn.classList.remove('active');
         });
         
         const activeBtn = container.querySelector(`[data-tab="${tabId}"]`);
         if (activeBtn) activeBtn.classList.add('active');
         
-        // Mostrar/ocultar contenido
-        container.querySelectorAll('.matriz-content').forEach(content => {
-            content.style.display = 'none';
+        // Mostrar/ocultar contenido (usando nueva clase)
+        container.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
         });
         
         const activeContent = container.querySelector(`#matriz-${tabId}-14`);
-        if (activeContent) activeContent.style.display = 'block';
+        if (activeContent) activeContent.classList.add('active');
         
         this.currentMatrixTab = tabId;
     }
@@ -413,86 +413,71 @@ let problemaLogico14Instance = null;
 function loadProblemaLogico14() {
     const toolContent = document.getElementById('tool-content');
     toolContent.innerHTML = `
-        <div id="problema-logico-14" class="problema-logico14-container">
-            <h1>Restaurantes y Preferencias - Problema Lógico 14</h1>
+        <div id="problema-logico-14" class="problema-logico-14">
+            <h1 class="main-title">Restaurantes y Preferencias - Problema Lógico 14</h1>
             
-            <div class="problema-layout">
-                <div class="problema-sidebar">
-                    <div class="control-panel">
-                        <h3><i class="fas fa-tools"></i> Controles</h3>
-                        <div class="control-buttons">
-                            <button class="btn-control btn-reiniciar" onclick="problemaLogico14Instance.reiniciar()">
-                                <i class="fas fa-refresh"></i> Reiniciar
-                            </button>
-                            <button id="btn-siguiente-14" class="btn-control btn-siguiente" onclick="problemaLogico14Instance.siguientePaso()">
-                                <i class="fas fa-arrow-right"></i> Siguiente
-                            </button>
-                            <button id="btn-resolver-14" class="btn-control btn-resolver" onclick="problemaLogico14Instance.resolverCompleto()">
-                                <i class="fas fa-magic"></i> Resolver
-                            </button>
-                        </div>
+            <div class="layout-container">
+                <div class="sidebar-panel">
+                    <h3><i class="fas fa-tools"></i> Controles</h3>
+                    <div class="control-buttons">
+                        <button class="btn-control btn-reiniciar" onclick="problemaLogico14Instance.reiniciar()">
+                            <i class="fas fa-refresh"></i> Reiniciar
+                        </button>
+                        <button id="btn-siguiente-14" class="btn-control btn-siguiente" onclick="problemaLogico14Instance.siguientePaso()">
+                            <i class="fas fa-arrow-right"></i> Siguiente
+                        </button>
+                        <button id="btn-resolver-14" class="btn-control btn-resolver" onclick="problemaLogico14Instance.resolverCompleto()">
+                            <i class="fas fa-magic"></i> Resolver
+                        </button>
                     </div>
                     
-                    <div class="pistas-panel">
-                        <h3><i class="fas fa-lightbulb"></i> Pistas</h3>
-                        <div class="pistas-list">
-                            <div class="pista">
-                                <strong>1.</strong> Ana no va al restaurante Italiano, y no bebe Vino.
-                            </div>
-                            <div class="pista">
-                                <strong>2.</strong> Ben prefiere el restaurante Chino, pero no come Pizza.
-                            </div>
-                            <div class="pista">
-                                <strong>3.</strong> Carmen no come Tacos y no va al restaurante Mexicano.
-                            </div>
-                            <div class="pista">
-                                <strong>4.</strong> David bebe Agua y come Quiche.
-                            </div>
-                            <div class="pista">
-                                <strong>5.</strong> La persona que va al Italiano come Pizza y bebe Vino.
-                            </div>
-                            <div class="pista">
-                                <strong>6.</strong> La persona que come Arroz va al restaurante Chino.
-                            </div>
-                            <div class="pista">
-                                <strong>7.</strong> Quien bebe Cerveza come Tacos y va al Mexicano.
-                            </div>
-                        </div>
+                    <div class="problema-info">
+                        <h4><i class="fas fa-lightbulb"></i> Pistas</h4>
+                        <ul>
+                            <li>1. Ana no va al restaurante Italiano, y no bebe Vino.</li>
+                            <li>2. Ben prefiere el restaurante Chino, pero no come Pizza.</li>
+                            <li>3. Carmen no come Tacos y no va al restaurante Mexicano.</li>
+                            <li>5. La persona que va al Italiano come Pizza y bebe Vino.</li>
+                            <li>6. La persona que come Arroz va al restaurante Chino.</li>
+                            <li>7. Quien bebe Cerveza come Tacos y va al Mexicano.</li>
+                        </ul>
                     </div>
                     
-                    <div class="step-info">
+                    <div class="problema-info">
                         <h4>Preparado para comenzar</h4>
                         <p>Haz clic en "Siguiente" para comenzar con el análisis paso a paso.</p>
                     </div>
                 </div>
                 
-                <div class="problema-main">
-                    <div class="enunciado">
-                        <h2>Enunciado del Problema</h2>
-                        <p>Cuatro amigos (Ana, Ben, Carmen y David) van a diferentes restaurantes (Italiano, Chino, Mexicano, Francés) donde cada uno pide una comida diferente (Pizza, Arroz, Tacos, Quiche) y una bebida diferente (Vino, Té, Cerveza, Agua). Basándote en las pistas proporcionadas, determina qué restaurante visitó cada persona, qué comió y qué bebió.</p>
+                <div class="main-content">
+                    <div class="paso-descripcion">
+                        <div id="pl14-descripcion-paso">
+                            <strong>Enunciado del Problema:</strong><br>
+                            Cuatro amigos (Ana, Ben, Carmen y David) van a diferentes restaurantes (Italiano, Chino, Mexicano, Francés) donde cada uno pide una comida diferente (Pizza, Arroz, Tacos, Quiche) y una bebida diferente (Vino, Té, Cerveza, Agua). Basándote en las pistas proporcionadas, determina qué restaurante visitó cada persona, qué comió y qué bebió.
+                        </div>
                     </div>
                     
-                    <div class="matrices-container">
+                    <div class="matrices-tabs">
                         <div class="tab-buttons">
-                            <button class="tab-btn active" data-tab="personas">
+                            <button class="tab-button active" data-tab="personas">
                                 <i class="fas fa-users"></i> Personas-Restaurantes
                             </button>
-                            <button class="tab-btn" data-tab="comidas">
+                            <button class="tab-button" data-tab="comidas">
                                 <i class="fas fa-utensils"></i> Personas-Comidas
                             </button>
-                            <button class="tab-btn" data-tab="bebidas">
+                            <button class="tab-button" data-tab="bebidas">
                                 <i class="fas fa-glass-martini"></i> Personas-Bebidas
                             </button>
-                            <button class="tab-btn" data-tab="relaciones">
+                            <button class="tab-button" data-tab="relaciones">
                                 <i class="fas fa-link"></i> Relaciones Finales
                             </button>
                         </div>
                         
-                        <div class="matrices-content">
-                            <div id="matriz-personas-14" class="matriz-content" style="display: block;"></div>
-                            <div id="matriz-comidas-14" class="matriz-content" style="display: none;"></div>
-                            <div id="matriz-bebidas-14" class="matriz-content" style="display: none;"></div>
-                            <div id="matriz-relaciones-14" class="matriz-content" style="display: none;"></div>
+                        <div class="matriz-container">
+                            <div id="matriz-personas-14" class="tab-content active"></div>
+                            <div id="matriz-comidas-14" class="tab-content"></div>
+                            <div id="matriz-bebidas-14" class="tab-content"></div>
+                            <div id="matriz-relaciones-14" class="tab-content"></div>
                         </div>
                     </div>
                     

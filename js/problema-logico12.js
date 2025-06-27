@@ -153,8 +153,7 @@ function aplicarCambios12(cambios) {
 
 function actualizarDisplay12() {
     const paso = PROBLEMA_LOGICO_12.pasos[PROBLEMA_LOGICO_12.pasoActual];
-    document.getElementById('titulo-paso-12').textContent = `Paso ${PROBLEMA_LOGICO_12.pasoActual + 1}: ${paso.titulo}`;
-    document.getElementById('descripcion-paso-12').innerHTML = paso.descripcion;
+    document.getElementById('pl12-descripcion-paso').innerHTML = `<strong>Paso ${PROBLEMA_LOGICO_12.pasoActual + 1}: ${paso.titulo}</strong><br>${paso.descripcion}`;
     
     // Actualizar matrices
     actualizarMatrizHTML12('padre-nombre', PROBLEMA_LOGICO_12.matrices.PadreNombre, PROBLEMA_LOGICO_12.padres, PROBLEMA_LOGICO_12.nombres);
@@ -173,7 +172,7 @@ function actualizarDisplay12() {
 }
 
 function actualizarMatrizHTML12(tipo, matriz, filas, columnas) {
-    let html = '<table class="matrix-table"><thead><tr><th></th>';
+    let html = '<table class="logic-grid"><thead><tr><th></th>';
     
     // Headers de columnas
     for (let col of columnas) {
@@ -186,8 +185,20 @@ function actualizarMatrizHTML12(tipo, matriz, filas, columnas) {
         html += `<tr><th>${fila}</th>`;
         for (let col of columnas) {
             const valor = matriz[fila][col];
-            const valorDisplay = valor === "•" ? "●" : valor;
-            html += `<td data-valor="${valor}">${valorDisplay}</td>`;
+            let claseCSS = '';
+            let contenido = '';
+            
+            if (valor === "•") {
+                claseCSS = 'yes';
+                contenido = '';
+            } else if (valor === "X") {
+                claseCSS = 'no';
+                contenido = '';
+            } else {
+                contenido = valor;
+            }
+            
+            html += `<td class="${claseCSS}" data-valor="${valor}">${contenido}</td>`;
         }
         html += '</tr>';
     }
@@ -197,8 +208,11 @@ function actualizarMatrizHTML12(tipo, matriz, filas, columnas) {
 }
 
 function mostrarSolucionFinal12() {
-    let solucion = '<h3>¡Problema Resuelto!</h3>';
-    solucion += '<div class="solucion-resumen">';
+    let solucion = `
+        <div class="solution-panel">
+            <h3>🎉 ¡Problema Resuelto!</h3>
+            <div class="solution-grid">
+    `;
     
     // Buscar las asignaciones finales
     for (let padre of PROBLEMA_LOGICO_12.padres) {
@@ -240,23 +254,33 @@ function mostrarSolucionFinal12() {
         }
         
         solucion += `
-            <div class="solucion-padre">
-                <h4>${profesion}: ${nombre} ${padre}</h4>
-                <p><strong>Hijo:</strong> ${hijo}</p>
-                <p><strong>Aprendices:</strong> ${aprendizJulio} en julio, ${aprendizAgosto} en agosto</p>
+            <div class="solution-item">
+                <h4>${profesion}</h4>
+                <p><strong>${nombre} ${padre}</strong></p>
+                <p>Hijo: ${hijo}</p>
+                <p>Aprendices: ${aprendizJulio} (jul), ${aprendizAgosto} (ago)</p>
             </div>
         `;
     }
     
-    solucion += '</div>';
-    document.getElementById('solucion-final-12').innerHTML = solucion;
+    solucion += `
+            </div>
+        </div>
+    `;
+    
+    const solucionDiv = document.getElementById('solucion-final-12');
+    solucionDiv.innerHTML = solucion;
+    solucionDiv.style.display = 'block';
 }
 
 function reiniciar12() {
     PROBLEMA_LOGICO_12.pasoActual = 0;
     inicializarMatrices12();
     actualizarDisplay12();
-    document.getElementById('solucion-final-12').innerHTML = '<p>La solución aparecerá aquí una vez completados todos los pasos.</p>';
+    
+    const solucionDiv = document.getElementById('solucion-final-12');
+    solucionDiv.style.display = 'none';
+    solucionDiv.innerHTML = '';
 }
 
 function siguientePaso12() {
@@ -277,48 +301,61 @@ function resolverCompleto12() {
 }
 
 function mostrarMatriz12(tipo) {
-    document.querySelectorAll('.problema-logico12-container .tab-btn').forEach(btn => {
+    // Desactivar todos los botones de pestaña
+    document.querySelectorAll('.problema-logico-12 .tab-button').forEach(btn => {
         btn.classList.remove('active');
     });
     
-    document.querySelectorAll('.problema-logico12-container .matriz-content').forEach(content => {
+    // Ocultar todo el contenido de pestañas
+    document.querySelectorAll('.problema-logico-12 .tab-content').forEach(content => {
         content.classList.remove('active');
     });
     
-    document.querySelector(`.problema-logico12-container .tab-btn[onclick="mostrarMatriz12('${tipo}')"]`).classList.add('active');
-    document.getElementById(`matriz-${tipo}-12`).classList.add('active');
+    // Activar el botón y contenido correspondiente
+    const activeBtn = document.querySelector(`.problema-logico-12 .tab-button[data-tab="${tipo}"]`);
+    if (activeBtn) activeBtn.classList.add('active');
+    
+    const activeContent = document.getElementById(`matriz-${tipo}-12`);
+    if (activeContent) activeContent.classList.add('active');
+}
+
+function setupTabListeners12() {
+    document.querySelectorAll('.problema-logico-12 .tab-button').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const tab = e.target.dataset.tab || e.target.closest('.tab-button').dataset.tab;
+            if (tab) mostrarMatriz12(tab);
+        });
+    });
 }
 
 function loadProblemaLogico12() {
     const toolContent = document.getElementById('tool-content');
     toolContent.innerHTML = `
-        <div class="problema-logico12-container">
-            <h1>El Aprendizaje de un Oficio</h1>
+        <div class="problema-logico-12">
+            <h1 class="main-title">El Aprendizaje de un Oficio - Problema Lógico 12</h1>
             
-            <div class="problema-layout">
-                <div class="problema-sidebar">
-                    <div class="control-panel">
-                        <h3><i class="fas fa-tools"></i> Controles</h3>
-                        <div class="control-buttons">
-                            <button class="btn-control btn-reiniciar" onclick="reiniciar12()">
-                                <i class="fas fa-refresh"></i> Reiniciar
-                            </button>
-                            <button id="btn-siguiente-12" class="btn-control btn-siguiente" onclick="siguientePaso12()">
-                                <i class="fas fa-arrow-right"></i> Siguiente
-                            </button>
-                            <button id="btn-resolver-12" class="btn-control btn-resolver" onclick="resolverCompleto12()">
-                                <i class="fas fa-check-double"></i> Resolver Todo
-                            </button>
-                        </div>
+            <div class="layout-container">
+                <div class="sidebar-panel">
+                    <h3><i class="fas fa-tools"></i> Controles</h3>
+                    <div class="control-buttons">
+                        <button class="btn-control btn-reiniciar" onclick="reiniciar12()">
+                            <i class="fas fa-refresh"></i> Reiniciar
+                        </button>
+                        <button id="btn-siguiente-12" class="btn-control btn-siguiente" onclick="siguientePaso12()">
+                            <i class="fas fa-arrow-right"></i> Siguiente
+                        </button>
+                        <button id="btn-resolver-12" class="btn-control btn-resolver" onclick="resolverCompleto12()">
+                            <i class="fas fa-check-double"></i> Resolver Todo
+                        </button>
                     </div>
                     
-                    <div class="enunciado-panel">
-                        <h3>Enunciado</h3>
+                    <div class="problema-info">
+                        <h4><i class="fas fa-info-circle"></i> Enunciado</h4>
                         <p>El señor García y otros dos especialistas trabajan en ramas diferentes. Cada uno tiene un hijo al que enseña su propio oficio, pero los chicos han expresado su deseo de aprender algo de los otros dos. El año pasado, cada chico trabajó como aprendiz con uno de los otros dos hombres en julio y con el segundo en agosto.</p>
                     </div>
                     
-                    <div class="pistas-panel">
-                        <h3>Pistas</h3>
+                    <div class="problema-info">
+                        <h4><i class="fas fa-lightbulb"></i> Pistas</h4>
                         <ul>
                             <li><strong>P1:</strong> Pepe trabajó con el electricista en julio y con Carlos en agosto.</li>
                             <li><strong>P2:</strong> Paco, cuyo apellido no es Benítez, no trabajó con el mecánico durante el verano.</li>
@@ -329,32 +366,43 @@ function loadProblemaLogico12() {
                     </div>
                 </div>
                 
-                <div class="problema-main">
-                    <div class="paso-info">
-                        <h2 id="titulo-paso-12"></h2>
-                        <div id="descripcion-paso-12" class="descripcion-paso"></div>
-                    </div>
-                    
-                    <div class="matrices-container">
-                        <div class="matriz-tab">
-                            <div class="tab-buttons">
-                                <button class="tab-btn active" onclick="mostrarMatriz12('padre-nombre')">Padre - Nombre</button>
-                                <button class="tab-btn" onclick="mostrarMatriz12('padre-profesion')">Padre - Profesión</button>
-                                <button class="tab-btn" onclick="mostrarMatriz12('padre-hijo')">Padre - Hijo</button>
-                                <button class="tab-btn" onclick="mostrarMatriz12('hijo-julio')">Hijo - Aprendiz Julio</button>
-                                <button class="tab-btn" onclick="mostrarMatriz12('hijo-agosto')">Hijo - Aprendiz Agosto</button>
-                            </div>
-                            <div class="tab-content">
-                                <div id="matriz-padre-nombre-12" class="matriz-content active"></div>
-                                <div id="matriz-padre-profesion-12" class="matriz-content"></div>
-                                <div id="matriz-padre-hijo-12" class="matriz-content"></div>
-                                <div id="matriz-hijo-julio-12" class="matriz-content"></div>
-                                <div id="matriz-hijo-agosto-12" class="matriz-content"></div>
-                            </div>
+                <div class="main-content">
+                    <div class="paso-descripcion">
+                        <div id="pl12-descripcion-paso">
+                            <strong>Estado Inicial:</strong><br>
+                            3 padres con apellidos, 3 nombres, 3 profesiones, 3 hijos. Haga clic en "Siguiente" para comenzar el análisis paso a paso.
                         </div>
                     </div>
                     
-                    <div id="solucion-final-12" class="solucion-final-container"></div>
+                    <div class="matrices-tabs">
+                        <div class="tab-buttons">
+                            <button class="tab-button active" data-tab="padre-nombre">
+                                <i class="fas fa-user"></i> Padre - Nombre
+                            </button>
+                            <button class="tab-button" data-tab="padre-profesion">
+                                <i class="fas fa-briefcase"></i> Padre - Profesión
+                            </button>
+                            <button class="tab-button" data-tab="padre-hijo">
+                                <i class="fas fa-users"></i> Padre - Hijo
+                            </button>
+                            <button class="tab-button" data-tab="hijo-julio">
+                                <i class="fas fa-calendar-alt"></i> Hijo - Aprendiz Julio
+                            </button>
+                            <button class="tab-button" data-tab="hijo-agosto">
+                                <i class="fas fa-calendar"></i> Hijo - Aprendiz Agosto
+                            </button>
+                        </div>
+                        
+                        <div class="matriz-container">
+                            <div id="matriz-padre-nombre-12" class="tab-content active"></div>
+                            <div id="matriz-padre-profesion-12" class="tab-content"></div>
+                            <div id="matriz-padre-hijo-12" class="tab-content"></div>
+                            <div id="matriz-hijo-julio-12" class="tab-content"></div>
+                            <div id="matriz-hijo-agosto-12" class="tab-content"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="solucion-final-12" class="solucion-final" style="display: none;"></div>
                 </div>
             </div>
         </div>
@@ -362,4 +410,17 @@ function loadProblemaLogico12() {
     
     inicializarMatrices12();
     actualizarDisplay12();
+    
+    // Configurar event listeners para las pestañas
+    setupTabListeners12();
+    
+    // Actualizar menú
+    document.querySelectorAll('#sidebar button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    const menuButton = document.querySelector('button[onclick="app.loadTool(\'problemaLogico12\')"]');
+    if (menuButton) {
+        menuButton.classList.add('active');
+    }
 }

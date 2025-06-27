@@ -215,6 +215,9 @@ class ProblemaLogico6 {
 
                 <div class="edad-solucion-container" ${this.currentStep < this.maxSteps ? 'style="display: none;"' : ''}>
                     <h3><i class="fas fa-trophy"></i> Solución Final</h3>
+                    
+                    ${this.generarTablaSolucion()}
+                    
                     <div class="edad-solucion-grid">
                         ${Object.entries(this.solucionCorrecta)
                             .sort((a, b) => a[1].edad - b[1].edad)
@@ -227,6 +230,8 @@ class ProblemaLogico6 {
                         `).join('')}
                     </div>
                 </div>
+
+                ${this.currentStep >= this.maxSteps ? this.generarTablaSolucion() : ''}
             </div>
         `;
     }
@@ -236,6 +241,44 @@ class ProblemaLogico6 {
         if (edad === 98) return '(La mayor)';
         if (edad === 95) return '(Única edad impar)';
         return '';
+    }
+
+    // Función para generar tabla de solución estilo Problema Lógico 3
+    generarTablaSolucion() {
+        const solucionCompleta = Object.entries(this.solucionCorrecta)
+            .sort((a, b) => a[1].edad - b[1].edad)
+            .map(([nombre, datos]) => ({
+                nombre: nombre,
+                apellido: datos.apellido,
+                edad: datos.edad,
+                posicion: this.getPositionText(datos.edad)
+            }));
+
+        return `
+            <div class="edad-tabla-solucion">
+                <h3><i class="fas fa-table"></i> Tabla de Solución Final</h3>
+                <table class="tabla-solucion-final">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-user"></i> Nombre</th>
+                            <th><i class="fas fa-id-card"></i> Apellido</th>
+                            <th><i class="fas fa-birthday-cake"></i> Edad</th>
+                            <th><i class="fas fa-info-circle"></i> Observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${solucionCompleta.map(persona => `
+                            <tr>
+                                <td class="nombre-cell">${persona.nombre}</td>
+                                <td class="apellido-cell">${persona.apellido}</td>
+                                <td class="edad-cell">${persona.edad} años</td>
+                                <td class="observacion-cell">${persona.posicion}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
     }
 
     renderMatrix() {

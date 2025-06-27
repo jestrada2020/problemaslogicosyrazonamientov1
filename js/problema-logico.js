@@ -7,11 +7,11 @@ const problemaLogico = {
     
     pasosSolucion: [
         {
-            descripcion: "<strong>Estado Inicial:</strong> Cuadrícula vacía. A continuación, aplicaremos las pistas.",
+            descripcion: "Estado inicial: cuadrícula vacía.",
             cambios: []
         },
         {
-            descripcion: "<strong>Aplicando Pistas Directas:</strong><br><strong>Pista 1:</strong> El señor Blanco NO es el Banquero.<br><strong>Pista 2:</strong> El señor Castaño NO es el Fotógrafo.<br><strong>Pista 3:</strong> El señor Blanco NO es el Cantante.<br><strong>Pista 4:</strong> El señor Moreno NO es el Cantante. El señor Rubio NO es el Cantante.",
+            descripcion: "Aplicando pistas directas:<br>• Blanco NO es banquero (pista 1)<br>• Castaño NO es fotógrafo (pista 2)<br>• Blanco NO es cantante (pista 3)<br>• Moreno y Rubio NO son cantantes (pista 4)",
             cambios: [
                 {profesion: "Banquero", nombre: "Blanco", valor: "X"},
                 {profesion: "Fotógrafo", nombre: "Castaño", valor: "X"},
@@ -21,25 +21,25 @@ const problemaLogico = {
             ]
         },
         {
-            descripcion: "<strong>Deducción 1: ¿Quién es el Cantante?</strong><br>Observando la fila 'Cantante', vemos que ni Moreno, ni Rubio, ni Blanco pueden ser el Cantante. Por lo tanto, el señor <strong>Castaño ES el Cantante</strong>.",
+            descripcion: "Solo Castaño puede ser cantante. <strong>Castaño = Cantante</strong>",
             cambios: [
                 {profesion: "Cantante", nombre: "Castaño", valor: "✓"}
             ]
         },
         {
-            descripcion: "<strong>Deducción 2: ¿Qué profesión tiene el señor Blanco?</strong><br>El señor Blanco no es Banquero ni Cantante. Solo le quedan las opciones de ser Tendero o Fotógrafo. Considerando las pistas, el señor <strong>Blanco ES el Fotógrafo</strong>.",
+            descripcion: "Blanco no es banquero ni cantante. Castaño no es fotógrafo. <strong>Blanco = Fotógrafo</strong>",
             cambios: [
                 {profesion: "Fotógrafo", nombre: "Blanco", valor: "✓"}
             ]
         },
         {
-            descripcion: "<strong>Deducción 3: ¿Quién es el Banquero?</strong><br>El Banquero no es el Sr. Blanco ni el Sr. Castaño. Solo quedan el Sr. Moreno o el Sr. Rubio. Con las asignaciones actuales, el señor <strong>Moreno ES el Banquero</strong>.",
+            descripcion: "Solo quedan Moreno y Rubio para banquero y tendero. <strong>Moreno = Banquero</strong>",
             cambios: [
                 {profesion: "Banquero", nombre: "Moreno", valor: "✓"}
             ]
         },
         {
-            descripcion: "<strong>Deducción 4: ¿Quién es el Tendero?</strong><br>Por eliminación, la única profesión restante para el Sr. Rubio es Tendero. Por lo tanto, el señor <strong>Rubio ES el Tendero</strong>.<br><strong>¡Problema Resuelto!</strong>",
+            descripcion: "Por eliminación: <strong>Rubio = Tendero</strong><br>Problema resuelto.",
             cambios: [
                 {profesion: "Tendero", nombre: "Rubio", valor: "✓"}
             ]

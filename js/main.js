@@ -38,66 +38,69 @@ const app = {
         } else if(tool === 'problemaLogico1') {
             content = `
             <div class="problema-logico">
-                <h1 class="main-title">Resolución Interactiva de Problema Lógico</h1>
+                <h1 class="main-title">Problema Lógico 1</h1>
                 
-                <div class="control-panel">
-                    <div class="control-buttons">
-                        <button class="btn-control btn-reiniciar" onclick="problemaLogico.reiniciar()">
-                            <i class="fas fa-refresh"></i> Reiniciar
-                        </button>
-                        <button class="btn-control btn-siguiente" onclick="problemaLogico.siguientePaso()">
-                            <i class="fas fa-arrow-right"></i> Siguiente Paso
-                        </button>
-                        <button class="btn-control btn-resolver" onclick="problemaLogico.resolverTodo()">
-                            <i class="fas fa-check-double"></i> Resolver Todo
-                        </button>
-                    </div>
-                    
-                    <div class="problema-texto">
-                        <h4 style="color: white;">Problema:</h4>
-                        <p>Una joven asiste a una fiesta. Le presentan a cuatro hombres en una sucesión más bien rápida y, como es frecuente en tales reuniones, pronto se hace mención del tipo de trabajo a que se dedica cada uno. Desgraciadamente, a la chica le falla un poco la memoria. Al cabo de media hora, sólo es capaz de recordar que ha conocido al señor Castaño, el señor Blanco, el señor Moreno y el señor Rubio. Se acuerda también de que uno de ellos es fotógrafo, que hay un tendero, un banquero y un cantante, pero le resulta imposible señalar un nombre para cada uno. Su anfitriona, una amiga aficionada a las bromas, se niega a refrescarle la memoria, pero le proporciona cuatro pistas. Por fortuna, la lógica de la muchacha es mejor que su memoria y, rápidamente, empareja cada hombre con su profesión. ¿Puede hacerlo usted? Aquí están las pistas:</p>
+                <div class="layout-container">
+                    <div class="sidebar-panel">
+                        <h3><i class="fas fa-cog"></i> Controles</h3>
+                        <div class="control-buttons">
+                            <button class="btn-control btn-reiniciar" onclick="problemaLogico.reiniciar()">
+                                <i class="fas fa-refresh"></i> Reiniciar
+                            </button>
+                            <button class="btn-control btn-siguiente" onclick="problemaLogico.siguientePaso()">
+                                <i class="fas fa-arrow-right"></i> Siguiente
+                            </button>
+                            <button class="btn-control btn-resolver" onclick="problemaLogico.resolverTodo()">
+                                <i class="fas fa-check-double"></i> Resolver
+                            </button>
+                        </div>
                         
-                        <h4 style="color: white;">Pistas:</h4>
-                        <ul class="pistas-lista">
-                            <li><strong>Pista 1:</strong> El señor Blanco sondea al banquero sobre la posibilidad de obtener un préstamo.</li>
-                            <li><strong>Pista 2:</strong> El señor Castaño conoció al fotógrafo cuando le contrató para hacer las fotografías de su boda.</li>
-                            <li><strong>Pista 3:</strong> El cantante y el señor Blanco son amigos, pero nunca han tenido tratos de negocios.</li>
-                            <li><strong>Pista 4:</strong> Ni el señor Moreno ni el cantante conocían al señor Rubio antes de la fiesta.</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="main-content">
-                    <div class="paso-actual">
-                        <h3>Paso Actual</h3>
-                        <div id="descripcion-paso"></div>
+                        <div class="problema-info">
+                            <h4><i class="fas fa-info-circle"></i> Problema</h4>
+                            <p>Una joven asiste a una fiesta y conoce a cuatro hombres: señor Castaño, señor Blanco, señor Moreno y señor Rubio. Uno es fotógrafo, otro tendero, otro banquero y otro cantante. Usando las pistas, determine qué profesión tiene cada uno.</p>
+                        </div>
+                        
+                        <div class="problema-info">
+                            <h4><i class="fas fa-lightbulb"></i> Pistas</h4>
+                            <ul>
+                                <li><b>1.</b> El señor Blanco sondea al banquero sobre un préstamo.</li>
+                                <li><b>2.</b> El señor Castaño contrató al fotógrafo para su boda.</li>
+                                <li><b>3.</b> El cantante y el señor Blanco son amigos sin negocios.</li>
+                                <li><b>4.</b> Ni el señor Moreno ni el cantante conocían al señor Rubio.</li>
+                            </ul>
+                        </div>
                     </div>
                     
-                    <div class="cuadricula-container">
-                        <h3>Cuadrícula Lógica</h3>
-                        <table class="logic-grid" id="logic-grid">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Moreno</th>
-                                    <th>Castaño</th>
-                                    <th>Rubio</th>
-                                    <th>Blanco</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>Banquero</th>
-                                    <td id="cell-Banquero-Moreno"></td>
-                                    <td id="cell-Banquero-Castaño"></td>
-                                    <td id="cell-Banquero-Rubio"></td>
-                                    <td id="cell-Banquero-Blanco"></td>
-                                </tr>
-                                <tr>
-                                    <th>Tendero</th>
-                                    <td id="cell-Tendero-Moreno"></td>
-                                    <td id="cell-Tendero-Castaño"></td>
-                                    <td id="cell-Tendero-Rubio"></td>
+                    <div class="main-content">
+                        <div class="paso-descripcion">
+                            <div id="descripcion-paso"></div>
+                        </div>
+                        
+                        <div class="cuadricula-container">
+                            <h3><i class="fas fa-table"></i> Cuadrícula lógica</h3>
+                            <table class="logic-grid" id="logic-grid">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Moreno</th>
+                                        <th>Castaño</th>
+                                        <th>Rubio</th>
+                                        <th>Blanco</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Banquero</th>
+                                        <td id="cell-Banquero-Moreno"></td>
+                                        <td id="cell-Banquero-Castaño"></td>
+                                        <td id="cell-Banquero-Rubio"></td>
+                                        <td id="cell-Banquero-Blanco"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tendero</th>
+                                        <td id="cell-Tendero-Moreno"></td>
+                                        <td id="cell-Tendero-Castaño"></td>
+                                        <td id="cell-Tendero-Rubio"></td>
                                     <td id="cell-Tendero-Blanco"></td>
                                 </tr>
                                 <tr>
@@ -118,10 +121,12 @@ const app = {
                         </table>
                     </div>
                 </div>
-                
-                <div class="solucion-final" id="solucion-final" style="display: none;">
-                    <h3>¡Problema Resuelto!</h3>
-                    <div class="solucion-items" id="solucion-items"></div>
+                        
+                        <div class="solucion-final" id="solucion-final" style="display: none;">
+                            <h3>Solución</h3>
+                            <div class="solucion-items" id="solucion-items"></div>
+                        </div>
+                    </div>
                 </div>
             </div>`;
             toolContent.innerHTML = content;
@@ -144,36 +149,36 @@ const app = {
         } else if(tool === 'problemaLogico2') {
             content = `
             <div class="problema-logico-2">
-                <h1 class="main-title">Resolución Interactiva: Problema Lógico 2</h1>
+                <h1 class="main-title">Problema Lógico 2</h1>
                 
                 <div class="layout-container">
                     <div class="sidebar-panel">
                         <h3><i class="fas fa-cog"></i> Controles</h3>
                         <div class="control-buttons">
                             <button class="btn-control btn-reiniciar" onclick="problemaLogico2.reiniciar()">
-                                <i class="fas fa-refresh"></i> Reiniciar Todo
+                                <i class="fas fa-refresh"></i> Reiniciar
                             </button>
                             <button class="btn-control btn-siguiente" id="pl2-btn-siguiente" onclick="problemaLogico2.siguientePaso()">
-                                <i class="fas fa-arrow-right"></i> Siguiente Paso
+                                <i class="fas fa-arrow-right"></i> Siguiente
                             </button>
                             <button class="btn-control btn-resolver" onclick="problemaLogico2.resolverTodo()">
-                                <i class="fas fa-check-double"></i> Resolver Completo
+                                <i class="fas fa-check-double"></i> Resolver
                             </button>
                         </div>
                         
                         <div class="problema-info">
-                            <h4><i class="fas fa-info-circle"></i> Problema:</h4>
-                            <p>Andrés, Luis, Noel, Jorge y Paco -el apellido de uno de ellos es Mora- han sido contratados recientemente para vender refrescos y golosinas en el estadio Miramar. Cada uno de los chicos vende sólo una clase de mercancía. Partiendo de las pistas siguientes, intente determinar el nombre completo de todos ellos y las mercancías que venden.</p>
+                            <h4><i class="fas fa-info-circle"></i> Problema</h4>
+                            <p>Cinco chicos venden refrescos y golosinas en el estadio. Cada uno vende una mercancía diferente. Determine el nombre completo y qué vende cada uno.</p>
                         </div>
                         
                         <div class="problema-info">
-                            <h4><i class="fas fa-lightbulb"></i> Pistas:</h4>
+                            <h4><i class="fas fa-lightbulb"></i> Pistas</h4>
                             <ul>
-                                <li><b>Pista 1:</b> Jorge, que no se apellida López, no vende palomitas de maíz.</li>
-                                <li><b>Pista 2:</b> El que se apellida Díaz no vende ni gaseosa ni caramelos.</li>
-                                <li><b>Pista 3:</b> Los cinco chicos son: Noel, Jorge, el que se apellida Soto, el que se apellida Cobos y el que vende helados.</li>
-                                <li><b>Pista 4:</b> El apellido de Andrés no es ni López ni Cobos. Ni Andrés ni el que se apellida Cobos venden caramelos.</li>
-                                <li><b>Pista 5:</b> Ni el vendedor de cacahuetes ni el vendedor de helados se llaman Paco o se apellidan Díaz.</li>
+                                <li><b>1.</b> Jorge (no López) no vende palomitas.</li>
+                                <li><b>2.</b> Díaz no vende gaseosa ni caramelos.</li>
+                                <li><b>3.</b> Son cinco: Noel, Jorge, Soto, Cobos y el vendedor de helados.</li>
+                                <li><b>4.</b> Andrés no es López ni Cobos. Ni Andrés ni Cobos venden caramelos.</li>
+                                <li><b>5.</b> Los vendedores de cacahuetes y helados no son Paco ni Díaz.</li>
                             </ul>
                         </div>
                     </div>
@@ -181,7 +186,7 @@ const app = {
                     <div class="main-content">
                         <div class="paso-descripcion">
                             <div id="pl2-descripcion-paso">
-                                <b>Estado Inicial:</b> Cuadrículas vacías. El problema indica que 'Mora' es uno de los apellidos.
+                                Estado inicial: cuadrículas vacías. El problema indica que 'Mora' es uno de los apellidos.
                             </div>
                         </div>
                         

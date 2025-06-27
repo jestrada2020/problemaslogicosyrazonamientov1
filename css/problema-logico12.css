@@ -1,353 +1,414 @@
 /* ======================================================================= */
-/* PROBLEMA LÓGICO 12 - PALETA DORADA AMARILLA Y MIEL */
+/* PROBLEMA LÓGICO 12 - ESTILO MINIMALISTA MODERNO */
 /* ======================================================================= */
 
-.problema-logico12-container {
+.problema-logico-12 {
     min-height: 100vh;
-    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
-    padding: 32px 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #2c3e50;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: #1e293b;
+    line-height: 1.6;
 }
 
-.problema-logico12-container h1 {
-    color: #fff;
+/* Main Title */
+.problema-logico-12 .main-title {
+    color: white;
     text-align: center;
-    font-size: 2.7rem;
-    margin-bottom: 36px;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
     font-weight: 700;
-    letter-spacing: 1px;
-    text-shadow: 0 4px 24px rgba(243, 156, 18, 0.3);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    letter-spacing: -0.025em;
 }
 
-.problema-logico12-container .problema-layout {
-    display: flex;
-    gap: 32px;
+/* Layout Container */
+.problema-logico-12 .layout-container {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 2rem;
     max-width: 1400px;
     margin: 0 auto;
-    align-items: flex-start;
+    align-items: start;
 }
 
-.problema-logico12-container .problema-sidebar {
-    width: 340px;
-    background: rgba(255,255,255,0.98);
-    border-radius: 18px;
-    padding: 28px 22px 22px 22px;
-    box-shadow: 0 8px 32px rgba(243, 156, 18, 0.15);
+/* Sidebar Panel */
+.problema-logico-12 .sidebar-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     position: sticky;
-    top: 32px;
-    z-index: 2;
-    border: 1.5px solid rgba(243, 156, 18, 0.2);
-    transition: box-shadow 0.2s;
+    top: 20px;
+    border: 1px solid #e2e8f0;
 }
 
-.problema-logico12-container .problema-sidebar:hover {
-    box-shadow: 0 12px 40px rgba(243, 156, 18, 0.25);
-}
-
-.problema-logico12-container .problema-main {
-    flex: 1;
-    background: rgba(255,255,255,0.98);
-    border-radius: 18px;
-    padding: 32px 28px 28px 28px;
-    box-shadow: 0 8px 32px rgba(243, 156, 18, 0.15);
-    border: 1.5px solid #e3e6f0;
-    min-width: 0;
-}
-
-.problema-logico12-container .control-panel {
-    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
-    border-radius: 14px;
-    padding: 18px 16px 14px 16px;
-    margin-bottom: 24px;
-    box-shadow: 0 4px 15px rgba(44,90,160,0.08);
-}
-
-.problema-logico12-container .control-buttons {
+.problema-logico-12 .sidebar-panel h3 {
+    color: #374151;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
     display: flex;
-    gap: 12px;
-    margin-bottom: 18px;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Control Buttons */
+.problema-logico-12 .control-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.problema-logico-12 .btn-control {
+    padding: 0.625rem 1.25rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
     justify-content: center;
 }
 
-.problema-logico12-container .btn-control {
-    padding: 12px 22px;
-    border: none;
-    border-radius: 9px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(.4,0,.2,1);
+.problema-logico-12 .btn-reiniciar {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
     color: white;
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 2px 8px rgba(44,90,160,0.08);
-    outline: none;
-    letter-spacing: 0.5px;
 }
 
-.problema-logico12-container .btn-reiniciar {
-    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+.problema-logico-12 .btn-siguiente {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    color: white;
 }
 
-.problema-logico12-container .btn-siguiente {
-    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+.problema-logico-12 .btn-resolver {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
 }
 
-.problema-logico12-container .btn-resolver {
-    background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+.problema-logico-12 .btn-control:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.problema-logico12-container .btn-control:hover:not(:disabled) {
-    transform: translateY(-2px) scale(1.04);
-    box-shadow: 0 6px 20px rgba(44,90,160,0.18);
-    filter: brightness(1.08);
-}
-
-.problema-logico12-container .btn-control:disabled {
+.problema-logico-12 .btn-control:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     transform: none;
 }
 
-.problema-logico12-container .paso-info {
-    background: rgba(255,255,255,0.92);
+/* Problem Info Cards */
+.problema-logico-12 .problema-info {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
     border-radius: 12px;
-    padding: 16px;
-    color: #2c3e50;
-    line-height: 1.6;
-    border-left: 4px solid #ddd4a7;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
-.problema-logico12-container .paso-info h2 {
-    color: #b8860b;
-    margin-bottom: 12px;
-    font-size: 1.3rem;
-}
-
-.problema-logico12-container .descripcion-paso {
-    background: rgba(255,255,255,0.85);
-    border-radius: 10px;
-    padding: 14px;
-    margin-top: 12px;
-    color: #2c3e50;
-}
-
-.problema-logico12-container .enunciado-panel,
-.problema-logico12-container .pistas-panel {
-    background: rgba(255,255,255,0.98);
-    border-radius: 14px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 20px rgba(243, 156, 18, 0.08);
-}
-
-.problema-logico12-container .enunciado-panel h3,
-.problema-logico12-container .pistas-panel h3 {
-    color: #f39c12;
-    margin-bottom: 14px;
-    font-size: 1.2rem;
+.problema-logico-12 .problema-info h4 {
+    color: #374151;
+    font-size: 1.125rem;
     font-weight: 600;
+    margin-bottom: 0.75rem;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
 }
 
-.problema-logico12-container .enunciado-panel p,
-.problema-logico12-container .pistas-panel li {
-    color: #2c3e50;
-    line-height: 1.6;
-    margin-bottom: 10px;
+.problema-logico-12 .problema-info p {
+    color: #6b7280;
+    margin-bottom: 0.5rem;
 }
 
-.problema-logico12-container .pistas-panel ul {
+.problema-logico-12 .problema-info ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
-.problema-logico12-container .pistas-panel li {
-    background: linear-gradient(135deg, #f8f9ff 0%, #e8ebff 100%);
+.problema-logico-12 .problema-info li {
+    background: white;
+    border: 1px solid #e2e8f0;
     border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 8px;
-    border-left: 3px solid #f39c12;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    color: #374151;
+    border-left: 3px solid #8b5cf6;
 }
 
-.problema-logico12-container .matriz-tabs {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    background: rgba(255,255,255,0.1);
-    padding: 8px;
+/* Main Content */
+.problema-logico-12 .main-content {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+}
+
+/* Step Description */
+.problema-logico-12 .paso-descripcion {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border: 1px solid #bae6fd;
     border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
 }
 
-.problema-logico12-container .tab-btn {
-    padding: 12px 18px;
+.problema-logico-12 .paso-descripcion div {
+    color: #0f172a;
+}
+
+/* Matrices Tabs */
+.problema-logico-12 .matrices-tabs {
+    margin-bottom: 1.5rem;
+}
+
+.problema-logico-12 .tab-buttons {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+    background: #f1f5f9;
+    padding: 0.25rem;
+    border-radius: 12px;
+    overflow-x: auto;
+    flex-wrap: wrap;
+}
+
+.problema-logico-12 .tab-button {
+    padding: 0.625rem 1rem;
     border: none;
-    border-radius: 8px;
-    background: rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.8);
-    font-weight: 600;
+    background: transparent;
+    color: #64748b;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s;
-    font-size: 14px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    font-size: 0.875rem;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 0.5rem;
 }
 
-.problema-logico12-container .tab-btn.active {
-    background: rgba(255,255,255,0.95);
-    color: #f39c12;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+.problema-logico-12 .tab-button.active {
+    background: white;
+    color: #8b5cf6;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.problema-logico12-container .tab-btn:hover:not(.active) {
-    background: rgba(255,255,255,0.2);
-    color: white;
-}
-
-.problema-logico12-container .matriz-content {
-    background: rgba(255,255,255,0.98);
-    border-radius: 14px;
-    padding: 24px;
-    box-shadow: 0 4px 20px rgba(243, 156, 18, 0.08);
-}
-
-.problema-logico12-container .matriz-content:not(.active) {
+.problema-logico-12 .tab-content {
     display: none;
 }
 
-.problema-logico12-container .matriz-content.active {
+.problema-logico-12 .tab-content.active {
     display: block;
 }
 
-.problema-logico12-container .matriz-logica {
+/* Logic Grid Tables */
+.problema-logico-12 .logic-grid {
     width: 100%;
     border-collapse: collapse;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(243, 156, 18, 0.08);
-    margin: 16px 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin: 1rem 0;
+    background: white;
 }
 
-.problema-logico12-container .matriz-logica th {
-    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+.problema-logico-12 .logic-grid th {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
     color: white;
-    padding: 16px 12px;
+    padding: 0.875rem 0.75rem;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 0.875rem;
     text-align: center;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.problema-logico12-container .matriz-logica td {
-    background: #f8f9ff;
-    padding: 14px 12px;
+.problema-logico-12 .logic-grid td {
+    background: #fafafa;
+    padding: 0.75rem;
     text-align: center;
     font-weight: 500;
-    font-size: 16px;
-    border: 1px solid #e3e6f0;
-    transition: all 0.2s;
+    font-size: 1rem;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease;
     cursor: pointer;
-    min-width: 45px;
-    min-height: 45px;
+    min-width: 3rem;
+    min-height: 2.5rem;
 }
 
-.problema-logico12-container .matriz-logica td:hover {
-    background: #e8ebff;
-    transform: scale(1.05);
+.problema-logico-12 .logic-grid td:hover {
+    background: #f3f4f6;
+    transform: scale(1.02);
 }
 
-.problema-logico12-container .matriz-logica td.si {
-    background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+.problema-logico-12 .logic-grid td[data-valor="•"] {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: white;
     font-weight: 700;
 }
 
-.problema-logico12-container .matriz-logica td.no {
-    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+.problema-logico-12 .logic-grid td[data-valor="X"] {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
     color: white;
     font-weight: 700;
 }
 
-.problema-logico12-container .solucion-final {
-    background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+.problema-logico-12 .logic-grid td[data-valor="•"]::before {
+    content: "●";
+    font-size: 1.2em;
+}
+
+.problema-logico-12 .logic-grid td[data-valor="X"]::before {
+    content: "✕";
+    font-size: 1.2em;
+}
+
+/* Solution Panel */
+.problema-logico-12 .solucion-final {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     border-radius: 16px;
-    padding: 28px;
+    padding: 2rem;
     text-align: center;
     color: white;
-    box-shadow: 0 8px 32px rgba(39, 174, 96, 0.2);
-    margin-top: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
 }
 
-.problema-logico12-container .solucion-final h3 {
+.problema-logico-12 .solucion-final h3 {
     color: white;
-    margin-bottom: 20px;
-    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
-.problema-logico12-container .solucion-grid {
+.problema-logico-12 .solucion-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-    margin-top: 20px;
+    gap: 1rem;
+    margin-top: 1.5rem;
 }
 
-.problema-logico12-container .solucion-item {
-    background: rgba(255,255,255,0.1);
-    border-radius: 10px;
-    padding: 16px;
+.problema-logico-12 .solucion-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1rem;
     text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.problema-logico-12 .solucion-item strong {
+    font-weight: 600;
+}
+
+/* Solution Panel Override */
+.problema-logico-12 .solution-panel {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+.problema-logico-12 .solution-panel h3 {
+    color: white;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.problema-logico-12 .solution-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.problema-logico-12 .solution-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.problema-logico-12 .solution-item h4 {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: white;
+}
+
+.problema-logico-12 .solution-item p {
+    margin-bottom: 0.25rem;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
-    .problema-logico12-container .problema-layout {
-        flex-direction: column;
-        gap: 20px;
+@media (max-width: 1024px) {
+    .problema-logico-12 .layout-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     
-    .problema-logico12-container .problema-sidebar {
-        width: 100%;
+    .problema-logico-12 .sidebar-panel {
         position: static;
     }
 }
 
 @media (max-width: 768px) {
-    .problema-logico12-container {
-        padding: 20px 16px;
+    .problema-logico-12 {
+        padding: 1rem;
     }
     
-    .problema-logico12-container h1 {
-        font-size: 2.2rem;
-        margin-bottom: 25px;
+    .problema-logico-12 .main-title {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
     }
     
-    .problema-logico12-container .problema-sidebar,
-    .problema-logico12-container .problema-main {
-        padding: 20px 16px;
+    .problema-logico-12 .sidebar-panel,
+    .problema-logico-12 .main-content {
+        padding: 1.25rem;
     }
     
-    .problema-logico12-container .matriz-tabs {
+    .problema-logico-12 .tab-buttons {
+        flex-wrap: wrap;
+    }
+    
+    .problema-logico-12 .control-buttons {
         flex-direction: column;
     }
     
-    .problema-logico12-container .tab-btn {
-        justify-content: center;
+    .problema-logico-12 .logic-grid th,
+    .problema-logico-12 .logic-grid td {
+        padding: 0.5rem 0.25rem;
+        font-size: 0.8rem;
     }
     
-    .problema-logico12-container .matriz-logica th,
-    .problema-logico12-container .matriz-logica td {
-        padding: 10px 8px;
-        font-size: 0.9rem;
-    }
-    
-    .problema-logico12-container .solucion-grid {
+    .problema-logico-12 .solution-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .problema-logico-12 .main-title {
+        font-size: 1.75rem;
+    }
+    
+    .problema-logico-12 .logic-grid {
+        font-size: 0.75rem;
+    }
+    
+    .problema-logico-12 .logic-grid th,
+    .problema-logico-12 .logic-grid td {
+        padding: 0.375rem 0.125rem;
     }
 }
